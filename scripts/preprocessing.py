@@ -77,8 +77,8 @@ def main():
     for ind in df_data.index:
 
         # Specify data files to read and process
-        fimg = config.PREP_DATA_INPDIR + df_data['data'][ind]
-        fmask = config.PREP_LABELS_INPDIR + df_data['label'][ind]
+        fimg = config.PREP_DATA_INPDIR + '/' + df_data['data'][ind]
+        fmask = config.PREP_LABELS_INPDIR + '/' + df_data['label'][ind]
         print(f'Processing file #{ind+1}: ', df_data['data'][ind])
 
         # Read imagery from disk

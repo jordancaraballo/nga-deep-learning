@@ -20,6 +20,7 @@ from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping
 from tensorflow.keras.callbacks import TensorBoard, CSVLogger
 
+
 # --------------------------------------------------------------------------
 # Preprocessing Functions
 # --------------------------------------------------------------------------
@@ -124,7 +125,7 @@ def gen_data_npz(fimg, img, mask, config, ntiles=1000, save_dir='train'):
         img_cp = batch_normalize(img_cp, axis=(0, 1), c=1e-8)
 
     # save dataset into local disk, npz format with x and y labels
-    cp.savez(f'{save_dir}{fimg[:-4]}.npz', x=img_cp, y=cp.asarray(mask_np))
+    cp.savez(f'{save_dir}/{fimg[:-4]}.npz', x=img_cp, y=cp.asarray(mask_np))
 
 
 # --------------------------------------------------------------------------
