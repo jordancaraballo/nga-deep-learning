@@ -356,7 +356,7 @@ def predict_windowing(x, model, config, spline):
 
     # predictions:
     patches_predict = \
-        model.predict(patches_array, batch_size=config.PRED_BSIZE)
+        model.predict(patches_array, batch_size=config.PRED_BATCH_SIZE)
 
     prediction = np.zeros(
         shape=(extended_height, extended_width, config.N_CLASSES),
