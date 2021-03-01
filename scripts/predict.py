@@ -188,7 +188,7 @@ def main():
             # --------------------------------------------------------------------------------
             # Generating visualization from prediction
             # --------------------------------------------------------------------------------
-            arr_to_tif(raster_f=fname, segments=prediction, outtif=save_image)
+            arr_to_tif(raster_f=fname, segments=prediction, out_tif=save_image)
             del prediction
 
         # This is the case where the prediction was already saved
