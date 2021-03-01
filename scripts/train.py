@@ -102,6 +102,10 @@ def main():
     train_dataset = \
         tf.data.Dataset.from_tensor_slices((train_images, train_labels))
 
+    # generate validation dataset
+    val_dataset = tf.data.Dataset.from_tensor_slices((val_images, val_labels))
+    val_dataset = val_dataset.batch(config.BATCH_SIZE)
+
     # Create model output directory
     os.system(f'mkdir -p {config.MODEL_SAVEDIR}')
 
@@ -139,7 +143,7 @@ def main():
         initial_epoch=config.START_EPOCH,
         epochs=config.N_EPOCHS,
         steps_per_epoch=STEPS_PER_EPOCH,
-        validation_data=(val_images, val_labels),
+        validation_data=val_dataset,
         callbacks=callbacks,
         verbose=2
     )
