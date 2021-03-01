@@ -15,7 +15,7 @@ from core.utils import get_tensorslices      # getting tensor slices
 from core.utils import gen_callbacks         # generate callbacks
 
 # tensorflow imports
-from tensorflow.keras import mixed_precision
+from tensorflow.keras.mixed_precision import experimental as mixed_precision
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.optimizers import Adadelta
 
