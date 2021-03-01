@@ -1,0 +1,30 @@
+# definition file to build xrasterlib conda environment
+name: nga-deep-learning
+
+channels:
+  - conda-forge
+  - defaults
+  - anaconda
+  - rapidsai
+  - nvidia
+
+dependencies:
+  - ipykernel
+  - rapids-blazing=0.17
+  - python=3.7
+  - cudatoolkit=11.0
+  - webcolors
+  - Pillow
+  - pip
+  - pip:
+    - tensorflow==2.4
+    - opencv-python
+    - scikit-image
+    - tifffile
+    - seaborn
+    - scipy
+    - Pillow
+    - imagecodecs
+    - rasterio
+    - dask-image
+

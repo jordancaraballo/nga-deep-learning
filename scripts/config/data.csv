@@ -1,0 +1,4 @@
+data,label,ntiles_train,ntiles_val,ymin,ymax,xmin,xmax
+Keelin00_20120130_data.tif,cm_Keelin00_20120130_new_2.tif,500,1000,0,50,0,50
+Keelin00_20180306_data.tif,cm_Keelin00_20180306_new_2.tif,500,1000,0,50,0,50
+Keelin01_20151117_data.tif,cm_Keelin01_20151117_new.tif,500,1000,0,50,0,50

@@ -1,0 +1,32 @@
+# Ignore editor files
+.idea/
+.vscode/
+.DS_Store
+*-workspace
+.ipynb_checkpoints/
+dask-worker-space/
+
+# Ignore compiled files
+__pycache__/
+xrasterlib.egg-info/
+build/
+dist/
+
+# Ignore data products
+*.tif
+*.pkl
+*.xml
+*.out
+*.npy
+data/
+
+# Ignore debugging and testing logs
+results/
+Results/
+Models/
+Logs/
+
+# Ignore other repositories
+xrasterlib/
+
+# EOF

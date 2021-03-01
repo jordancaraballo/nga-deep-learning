@@ -1,0 +1,10 @@
+tensorflow==2.3
+opencv-python
+scikit-image
+tifffile
+seaborn
+scipy
+Pillow
+imagecodecs
+rasterio
+dask-image
