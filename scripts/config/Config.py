@@ -72,21 +72,17 @@ class Configuration:
         self.PREP_DATA_FILE = 'config/data.csv'
 
         # self.PREP_DATA_INPDIR: directory where GeoTIF data rasters reside
-        # self.PREP_DATA_INPDIR = '/att/projects/Vietnam/data'
+        self.PREP_DATA_INPDIR = '/att/projects/Vietnam/data'
 
         # self.PREP_LABELS_INPDIR: directory where GeoTIF label rasters reside
-        # self.PREP_LABELS_INPDIR = '/att/projects/Vietnam/labels'
-
-        self.PREP_DATA_INPDIR = '/att/gpfsfs/atrepo01/ILAB/projects/Vietnam/Sarah/data'
-        self.PREP_LABELS_INPDIR = '/att/gpfsfs/atrepo01/ILAB/projects/Vietnam/Mary/cloud_labels'
-        self.PREP_ROOT_OUTDIR = '/att/gpfsfs/atrepo01/ILAB/projects/Vietnam/Jordan/test_container'
+        self.PREP_LABELS_INPDIR = '/att/projects/Vietnam/labels'
 
         # self.PREP_BANDS_OUTPUT: bands to output from data to train
         self.PREP_BANDS_OUTPUT = \
             ['Blue', 'Green', 'Red', 'NIR1']
 
         # self.PREP_ROOT_OUTDIR: root directory that leads to data subdirs
-        # self.PREP_ROOT_OUTDIR = '/att/projects/Vietnam/dataset'
+        self.PREP_ROOT_OUTDIR = '/att/projects/Vietnam/dataset'
 
         # self.PREP_TRAIN_OUTDIR: output directory to store training data
         self.PREP_TRAIN_OUTDIR = self.PREP_ROOT_OUTDIR + '/train'
@@ -161,16 +157,8 @@ class Configuration:
         self.MODEL_NAME = '100_unet_viet_cm_4chann_std_Adadelta_256_0.0001_128'
 
         # self.MODEL_SAVEDIR: directory to save trained models
-        # self.MODEL_SAVEDIR = f'/att/projects/Vietnam/unet/{self.MODEL_NAME}'
+        self.MODEL_SAVEDIR = f'/att/projects/Vietnam/unet/{self.MODEL_NAME}'
 
-        
-        
-        
-        self.MODEL_SAVEDIR = f'{self.PREP_ROOT_OUTDIR}/{self.MODEL_NAME}'
-
-        
-        
-        
         # self.MODEL_OUTPUT_NAME: output name for model to be saved
         self.MODEL_OUTPUT_NAME = f'{self.MODEL_SAVEDIR}/{self.MODEL_NAME}.h5'
 
@@ -204,15 +192,8 @@ class Configuration:
         self.PRED_BATCH_SIZE = 128
 
         # self.PRED_FILENAMES: regex to flag all files to predict
-        # self.PRED_FILENAMES = '/att/projects/Vietnam/images/*.tif'
-        # self.PRED_FILENAMES = glob.glob(self.PRED_FILENAMES)
-
-
-        # self.PRED_FILENAMES = '/att/gpfsfs/atrepo01/ILAB/projects/Vietnam/Jordan/data_keelin/*.tif'
-        self.PRED_FILENAMES = '/att/nobackup/mwooten3/Vietnam_LCLUC/TOA/M1BS/*.tif'
+        self.PRED_FILENAMES = '/att/projects/Vietnam/images/*.tif'
         self.PRED_FILENAMES = glob.glob(self.PRED_FILENAMES)
-
-
 
         # self.PRED_OVERLAP: overlap between tiles to predict
         self.PRED_OVERLAP = 0.25
