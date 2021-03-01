@@ -1,0 +1,1427 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>utils API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>utils</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># --------------------------------------------------------------------------
+# Core functions to train on NGA data.
+# --------------------------------------------------------------------------
+import gc                # clean garbage collection
+import glob              # get global files from directory
+import random            # for random integers
+from tqdm import tqdm    # for progress bar
+import numpy as np       # for arrays modifications
+import cupy as cp        # for arrays modifications
+import tensorflow as tf  # deep learning framework
+import scipy.signal      # for postprocessing
+import math              # for math calculations
+import rasterio as rio   # read rasters
+
+# Has a bug and will be included when bug is fixed.
+# from cuml.dask.preprocessing import OneHotEncoder, LabelBinarizer
+
+# For generating one-hot encoder labels
+from datetime import datetime
+from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping
+from tensorflow.keras.callbacks import TensorBoard, CSVLogger
+
+
+# --------------------------------------------------------------------------
+# Preprocessing Functions
+# --------------------------------------------------------------------------
+
+def image_normalize(img, axis=(0, 1), c=1e-8):
+    &#34;&#34;&#34;
+    Normalize to zero mean and unit standard deviation along the given axis.
+    Args:
+        img (numpy or cupy): array (w, h, c)
+        axis (integer tuple): into or tuple of width and height axis
+        c (float): epsilon to bound given std value
+    Return:
+        Normalize single image
+    ----------
+    Example
+    ----------
+        image_normalize(arr, axis=(0, 1), c=1e-8)
+    &#34;&#34;&#34;
+    return (img - img.mean(axis)) / (img.std(axis) + c)
+
+
+def batch_normalize(batch, axis=(0, 1), c=1e-8):
+    &#34;&#34;&#34;
+    Normalize batch to zero mean and unit standard deviation.
+    Args:
+        img (numpy or cupy): array (n, w, h, c)
+        axis (integer tuple): into or tuple of width and height axis
+        c (float): epsilon to bound given std value
+    Return:
+        Normalize batch of images.
+    ----------
+    Example
+    ----------
+        batch_normalize(arr, axis=(0, 1), c=1e-8)
+    &#34;&#34;&#34;
+    # Note: for loop was proven to be faster than map method
+    for b in range(batch.shape[0]):
+        batch[b, :, :, :] = image_normalize(batch[b, :, :, :], axis=axis, c=c)
+    return batch
+
+
+def gen_data_npz(fimg, img, mask, config, ntiles=1000, save_dir=&#39;train&#39;):
+    &#34;&#34;&#34;
+    Extract random patches from cupy arrays.
+    Args:
+        fimg (str): data filename
+        img (cupy.array): cupy array with data
+        mask (cupy.array): cupy array with mask
+        save_dir (str): directory to save output
+    Return:
+        save dataset to save_dir.
+    ----------
+    Example
+    ----------
+        gen_data_npz(&#39;image.tif&#39;, arr, mask, config, 8000, &#39;output&#39;)
+    &#34;&#34;&#34;
+    # set dimensions of the input image array, and get desired tile size
+    z_dim, x_dim, y_dim = img.shape
+    tsz = config.TILE_SIZE
+
+    # placeholders for final datasets
+    img_cp = cp.empty((ntiles, tsz, tsz, z_dim), dtype=cp.float32)
+    mask_np = np.empty((ntiles, tsz, tsz, config.N_CLASSES), dtype=np.float16)
+
+    # generate n number of tiles
+    for i in tqdm(range(ntiles)):
+
+        # Generate random integers from image
+        xc = random.randint(0, x_dim - tsz)
+        yc = random.randint(0, y_dim - tsz)
+
+        # verify data is not on nodata region
+        while cp.any(
+            img[:, xc:(xc + tsz), yc:(yc + tsz)] == config.NODATA_VAL
+        ):
+            xc = random.randint(0, x_dim - tsz)
+            yc = random.randint(0, y_dim - tsz)
+
+        # change order to (h, w, c)
+        tile_img = cp.moveaxis(
+            img[:, xc:(xc + tsz), yc:(yc + tsz)], 0, -1
+        )
+
+        # TODO: replace with cuml One-hot encoder on future date when they fix
+        # a bug on the output types. Using to_categorical in the meantime
+        # Converts labels into one-hot encoding labels
+        tile_mask = to_categorical(
+            cp.asnumpy(mask[xc:(xc + tsz), yc:(yc + tsz)]),
+            num_classes=config.N_CLASSES, dtype=&#39;float16&#39;
+        )
+
+        # maybe standardize here? depends on performance of single img vs batch
+        img_cp[i, :, :, :] = tile_img
+        mask_np[i, :, :, :] = tile_mask
+
+    # normalize
+    if config.NORMALIZE:
+        img_cp = img_cp / config.normalization_factor
+
+    # standardize
+    if config.STANDARDIZE:
+        img_cp = batch_normalize(img_cp, axis=(0, 1), c=1e-8)
+
+    # save dataset into local disk, npz format with x and y labels
+    cp.savez(f&#39;{save_dir}/{fimg[:-4]}.npz&#39;, x=img_cp, y=cp.asarray(mask_np))
+
+
+# --------------------------------------------------------------------------
+# Training Functions
+# --------------------------------------------------------------------------
+
+def get_tensorslices(data_dir=&#39;&#39;, img_id=&#39;x&#39;, label_id=&#39;y&#39;):
+    &#34;&#34;&#34;
+    Getting tensor slices from disk.
+    Args:
+        data_dir (str): directory where data resides
+        img_id (str): object id from npz file to get data from
+        label_id (str): object id from npz file to get labels from
+    Return:
+        get image and label datasets
+    ----------
+    Example
+    ----------
+        get_tensorslices(data_dir=&#39;images&#39;, img_id=&#39;x&#39;, label_id=&#39;y&#39;)
+    &#34;&#34;&#34;
+    # open files and generate training dataset
+    images = np.array([])
+    labels = np.array([])
+
+    # read all data files from disk
+    for f in glob.glob(f&#39;{data_dir}/*&#39;):
+        with np.load(f) as data:
+            # vstack image batches into memory
+            if images.size:  # if images has elements, vstack new batch
+                images = np.vstack([images, data[img_id]])
+            else:  # if images empty, images equals new batch
+                images = data[img_id]
+            # vstack label batches into memory
+            if labels.size:  # if labels has elements, vstack new batch
+                labels = np.vstack([labels, data[label_id]])
+            else:  # if labels empty, images equals new batch
+                labels = data[label_id]
+    return images, labels
+
+
+def data_augment(image, label):
+    &#34;&#34;&#34;
+    Augment data for semantic segmentation.
+    Args:
+        image (numpy.array): image numpy array
+        label (numpy.array): image numpy array
+    Return:
+        augmented image and label
+    ----------
+    Example
+    ----------
+        data_augment(image, label)
+    &#34;&#34;&#34;
+    # Thanks to the dataset.prefetch(AUTO) statement in the next function
+    # (below), this happens essentially for free on TPU. Data pipeline code
+    # is executed on the CPU part of the TPU, TPU is computing gradients.
+    randint = np.random.randint(1, 7)
+    if randint == 1:  # flip left and right
+        image = tf.image.random_flip_left_right(image)
+        label = tf.image.random_flip_left_right(label)
+    elif randint == 2:  # reverse second dimension
+        image = tf.image.random_flip_up_down(image)
+        label = tf.image.random_flip_up_down(label)
+    elif randint == 3:  # rotate 90 degrees
+        image = tf.image.rot90(image, k=1)
+        label = tf.image.rot90(label, k=1)
+    elif randint == 4:  # rotate 180 degrees
+        image = tf.image.rot90(image, k=2)
+        label = tf.image.rot90(label, k=2)
+    elif randint == 5:  # rotate 270 degrees
+        image = tf.image.rot90(image, k=3)
+        label = tf.image.rot90(label, k=3)
+    return image, label
+
+
+def get_training_dataset(dataset, config, do_aug=False, drop_remainder=False):
+    &#34;&#34;&#34;
+    Return training dataset to feed tf.fit.
+    Args:
+        dataset (tf.dataset): tensorflow dataset
+        config (Config): Config object with parameters
+        do_aug (bool): perform augmentation on the fly?
+        drop_remainder (bool): drop remaineder when value does not match batch
+    Return:
+        tf dataset for training
+    ----------
+    Example
+    ----------
+        get_tensorslices(data_dir=&#39;images&#39;, img_id=&#39;x&#39;, label_id=&#39;y&#39;)
+    &#34;&#34;&#34;
+    dataset = dataset.map(data_augment, num_parallel_calls=config.AUTOTUNE)
+    dataset = dataset.repeat()
+    dataset = dataset.shuffle(2048)
+    dataset = dataset.batch(config.BATCH_SIZE, drop_remainder=drop_remainder)
+    # prefetch next batch while training (autotune prefetch buffer size)
+    dataset = dataset.prefetch(config.AUTOTUNE)
+    return dataset
+
+
+def gen_callbacks(config, metadata):
+    &#34;&#34;&#34;
+    Generate tensorflow callbacks.
+    Args:
+        config (Config): object with configurations
+        metadata (dict): directory with callback metadata values
+    Return:
+        list of callback functions
+    ----------
+    Example
+    ----------
+        gen_callbacks(config, metadata)
+    &#34;&#34;&#34;
+    callback_list = list()
+
+    if &#39;TensorBoard&#39; in config.CALLBACKS:
+        # Generating tensorboard callbacks
+        tensor = TensorBoard(
+            log_dir=config.MODEL_SAVEDIR, write_graph=True,
+            histogram_freq=metadata[&#39;history_freq&#39;]
+        )
+        callback_list.append(tensor)
+
+    if &#39;CSVLogger&#39; in config.CALLBACKS:
+        # initialize model csv logger callback
+        csv_outfile = config.MODEL_OUTPUT_NAME[:-3] + &#39;_&#39; + \
+            datetime.now().strftime(&#34;%Y%m%d-%H%M%S&#34;)+&#39;.csv&#39;
+        csvlog = CSVLogger(csv_outfile, append=True, separator=&#39;;&#39;)
+        callback_list.append(csvlog)
+
+    if &#39;EarlyStopping&#39; in config.CALLBACKS:
+        # initialize model early stopping callback
+        early_stop = EarlyStopping(
+            patience=metadata[&#39;patience_earlystop&#39;],
+            monitor=metadata[&#39;monitor_earlystop&#39;]
+        )
+        callback_list.append(early_stop)
+
+    if &#39;ModelCheckpoint&#39; in config.CALLBACKS:
+        # initialize model checkpoint callback
+        checkpoint = ModelCheckpoint(
+            filepath=config.MODEL_OUTPUT_NAME[:-3]+&#39;_{epoch:02d}.h5&#39;,
+            monitor=metadata[&#39;monitor_checkpoint&#39;],
+            save_best_only=metadata[&#39;save_best_only&#39;],
+            save_freq=metadata[&#39;save_freq&#39;],
+            verbose=1
+        )
+        callback_list.append(checkpoint)
+
+    return callback_list
+
+
+# --------------------------------------------------------------------------
+# Prediction Functions
+# --------------------------------------------------------------------------
+
+def pad_image(img, target_size):
+    &#34;&#34;&#34;
+    Pad an image up to the target size.
+    Args:
+        img (numpy.arry): image array
+        target_size (int): image target size
+    Return:
+        padded image array
+    ----------
+    Example
+    ----------
+        pad_image(img, target_size=256)
+    &#34;&#34;&#34;
+    rows_missing = target_size - img.shape[0]
+    cols_missing = target_size - img.shape[1]
+    padded_img = np.pad(
+        img, ((0, rows_missing), (0, cols_missing), (0, 0)), &#39;constant&#39;
+    )
+    return padded_img
+
+
+def predict_windowing(x, model, config, spline):
+    &#34;&#34;&#34;
+    Predict scene using windowing mechanisms.
+    Args:
+        x (numpy.array): image array
+        model (tf h5): image target size
+        config (Config):
+        spline (numpy.array):
+    Return:
+        prediction scene array probabilities
+    ----------
+    Example
+    ----------
+        predict_windowing(x, model, config, spline)
+    &#34;&#34;&#34;
+    print(&#34;Entering windowing prediction&#34;, x.shape)
+
+    img_height = x.shape[0]
+    img_width = x.shape[1]
+    n_channels = x.shape[2]
+
+    # make extended img so that it contains integer number of patches
+    npatches_vertical = math.ceil(img_height / config.TILE_SIZE)
+    npatches_horizontal = math.ceil(img_width / config.TILE_SIZE)
+    extended_height = config.TILE_SIZE * npatches_vertical
+    extended_width = config.TILE_SIZE * npatches_horizontal
+    ext_x = np.zeros(
+        shape=(extended_height, extended_width, n_channels), dtype=np.float32
+    )
+
+    # fill extended image with mirrors:
+    ext_x[:img_height, :img_width, :] = x
+    for i in range(img_height, extended_height):
+        ext_x[i, :, :] = ext_x[2 * img_height - i - 1, :, :]
+    for j in range(img_width, extended_width):
+        ext_x[:, j, :] = ext_x[:, 2 * img_width - j - 1, :]
+
+    # now we assemble all patches in one array
+    patches_list = []  # do vstack later instead of list
+    for i in range(0, npatches_vertical):
+        for j in range(0, npatches_horizontal):
+            x0, x1 = i * config.TILE_SIZE, (i + 1) * config.TILE_SIZE
+            y0, y1 = j * config.TILE_SIZE, (j + 1) * config.TILE_SIZE
+            patches_list.append(ext_x[x0:x1, y0:y1, :])
+
+    patches_array = np.asarray(patches_list)
+
+    # standardize
+    if config.STANDARDIZE:
+        patches_array = batch_normalize(patches_array, axis=(0, 1), c=1e-8)
+
+    # predictions:
+    patches_predict = \
+        model.predict(patches_array, batch_size=config.PRED_BATCH_SIZE)
+
+    prediction = np.zeros(
+        shape=(extended_height, extended_width, config.N_CLASSES),
+        dtype=np.float32
+    )
+
+    # ensemble of patches probabilities
+    for k in range(patches_predict.shape[0]):
+        i = k // npatches_horizontal
+        j = k % npatches_horizontal
+        x0, x1 = i * config.TILE_SIZE, (i + 1) * config.TILE_SIZE
+        y0, y1 = j * config.TILE_SIZE, (j + 1) * config.TILE_SIZE
+        prediction[x0:x1, y0:y1, :] = patches_predict[k, :, :, :] * spline
+
+    return prediction[:img_height, :img_width, :]
+
+
+def predict_sliding(x, model, config, spline):
+    &#34;&#34;&#34;
+    Predict scene using sliding windows.
+    Args:
+        x (numpy.array): image array
+        model (tf h5): image target size
+        config (Config):
+        spline (numpy.array):
+    Return:
+        prediction scene array probabilities
+    ----------
+    Example
+    ----------
+        predict_windowing(x, model, config, spline)
+    &#34;&#34;&#34;
+    stride = math.ceil(config.TILE_SIZE * (1 - config.PRED_OVERLAP))
+
+    tile_rows = max(
+        int(math.ceil((x.shape[0] - config.TILE_SIZE) / stride) + 1), 1
+    )  # strided convolution formula
+
+    tile_cols = max(
+        int(math.ceil((x.shape[1] - config.TILE_SIZE) / stride) + 1), 1
+    )  # strided convolution formula
+
+    print(f&#39;{tile_cols} x {tile_rows} prediction tiles @ stride {stride} px&#39;)
+
+    full_probs = np.zeros((x.shape[0], x.shape[1], config.N_CLASSES))
+
+    count_predictions = \
+        np.zeros((x.shape[0], x.shape[1], config.N_CLASSES))
+
+    tile_counter = 0
+    for row in range(tile_rows):
+        for col in range(tile_cols):
+            x1 = int(col * stride)
+            y1 = int(row * stride)
+            x2 = min(x1 + config.TILE_SIZE, x.shape[1])
+            y2 = min(y1 + config.TILE_SIZE, x.shape[0])
+            x1 = max(int(x2 - config.TILE_SIZE), 0)
+            y1 = max(int(y2 - config.TILE_SIZE), 0)
+
+            img = x[y1:y2, x1:x2]
+            padded_img = pad_image(img, config.TILE_SIZE)
+            tile_counter += 1
+
+            padded_img = np.expand_dims(padded_img, 0)
+
+            # standardize
+            if config.STANDARDIZE:
+                padded_img = batch_normalize(padded_img, axis=(0, 1), c=1e-8)
+
+            imgn = padded_img
+            imgn = imgn.astype(&#39;float32&#39;)
+
+            padded_prediction = model.predict(imgn)[0]
+            prediction = padded_prediction[0:img.shape[0], 0:img.shape[1], :]
+            count_predictions[y1:y2, x1:x2] += 1
+            full_probs[y1:y2, x1:x2] += prediction * spline
+
+    # average the predictions in the overlapping regions
+    full_probs /= count_predictions
+    return full_probs
+
+
+def predict_all(x, model, config, spline):
+    &#34;&#34;&#34;
+    Predict full scene using average predictions.
+    Args:
+        x (numpy.array): image array
+        model (tf h5): image target size
+        config (Config):
+        spline (numpy.array):
+    Return:
+        prediction scene array average probabilities
+    ----------
+    Example
+    ----------
+        predict_all(x, model, config, spline)
+    &#34;&#34;&#34;
+    for i in range(8):
+        if i == 0:  # reverse first dimension
+            x_seg = predict_windowing(
+                x[::-1, :, :], model, config, spline=spline
+            ).transpose([2, 0, 1])
+        elif i == 1:  # reverse second dimension
+            temp = predict_windowing(
+                x[:, ::-1, :], model, config, spline=spline
+            ).transpose([2, 0, 1])
+            x_seg = temp[:, ::-1, :] + x_seg
+        elif i == 2:  # transpose(interchange) first and second dimensions
+            temp = predict_windowing(
+                x.transpose([1, 0, 2]), model, config, spline=spline
+            ).transpose([2, 0, 1])
+            x_seg = temp.transpose(0, 2, 1) + x_seg
+            gc.collect()
+        elif i == 3:
+            temp = predict_windowing(
+                np.rot90(x, 1), model, config, spline=spline
+            )
+            x_seg = np.rot90(temp, -1).transpose([2, 0, 1]) + x_seg
+            gc.collect()
+        elif i == 4:
+            temp = predict_windowing(
+                np.rot90(x, 2), model, config, spline=spline
+            )
+            x_seg = np.rot90(temp, -2).transpose([2, 0, 1]) + x_seg
+        elif i == 5:
+            temp = predict_windowing(
+                np.rot90(x, 3), model, config, spline=spline
+            )
+            x_seg = np.rot90(temp, -3).transpose(2, 0, 1) + x_seg
+        elif i == 6:
+            temp = predict_windowing(
+                x, model, config, spline=spline
+            ).transpose([2, 0, 1])
+            x_seg = temp + x_seg
+        elif i == 7:
+            temp = predict_sliding(
+                x, model, config, spline=spline
+            ).transpose([2, 0, 1])
+            x_seg = temp + x_seg
+            gc.collect()
+
+    del x, temp  # delete arrays
+    x_seg /= 8.0
+    return x_seg.argmax(axis=0)
+
+
+def _2d_spline(window_size=128, power=2) -&gt; np.array:
+    &#34;&#34;&#34;
+    Window method for boundaries/edge artifacts smoothing.
+    Args:
+        window_size (int): size of window/tile to smooth
+        power (int): spline polinomial power to use
+    Return:
+        smoothing distribution numpy array
+    ----------
+    Example
+    ----------
+        _2d_spline(window_size=128, power=2)
+    &#34;&#34;&#34;
+    intersection = int(window_size/4)
+    tria = scipy.signal.triang(window_size)
+    wind_outer = (abs(2*(tria)) ** power)/2
+    wind_outer[intersection:-intersection] = 0
+
+    wind_inner = 1 - (abs(2*(tria - 1)) ** power)/2
+    wind_inner[:intersection] = 0
+    wind_inner[-intersection:] = 0
+
+    wind = wind_inner + wind_outer
+    wind = wind / np.average(wind)
+    wind = np.expand_dims(np.expand_dims(wind, 1), 2)
+    wind = wind * wind.transpose(1, 0, 2)
+    return wind
+
+
+def arr_to_tif(raster_f, segments, out_tif=&#39;segment.tif&#39;, ndval=-9999):
+    &#34;&#34;&#34;
+    Save array into GeoTIF file.
+    Args:
+        raster_f (str): input data filename
+        segments (numpy.array): array with values
+        out_tif (str): output filename
+        ndval (int): no data value
+    Return:
+        save GeoTif to local disk
+    ----------
+    Example
+    ----------
+        arr_to_tif(&#39;inp.tif&#39;, segments, &#39;out.tif&#39;, ndval=-9999)
+    &#34;&#34;&#34;
+    # get geospatial profile, will apply for output file
+    with rio.open(raster_f) as src:
+        meta = src.profile
+        nodatavals = src.read_masks(1).astype(&#39;int16&#39;)
+    print(meta)
+
+    # load numpy array if file is given
+    if type(segments) == str:
+        segments = np.load(segments)
+    segments = segments.astype(&#39;int16&#39;)
+    print(segments.dtype)  # check datatype
+
+    nodatavals[nodatavals == 0] = ndval
+    segments[nodatavals == ndval] = nodatavals[nodatavals == ndval]
+
+    out_meta = meta  # modify profile based on numpy array
+    out_meta[&#39;count&#39;] = 1  # output is single band
+    out_meta[&#39;dtype&#39;] = &#39;int16&#39;  # data type is float64
+
+    # write to a raster
+    with rio.open(out_tif, &#39;w&#39;, **out_meta) as dst:
+        dst.write(segments, 1)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="utils.arr_to_tif"><code class="name flex">
+<span>def <span class="ident">arr_to_tif</span></span>(<span>raster_f, segments, out_tif='segment.tif', ndval=-9999)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Save array into GeoTIF file.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>raster_f</code></strong> :&ensp;<code>str</code></dt>
+<dd>input data filename</dd>
+<dt><strong><code>segments</code></strong> :&ensp;<code>numpy.array</code></dt>
+<dd>array with values</dd>
+<dt><strong><code>out_tif</code></strong> :&ensp;<code>str</code></dt>
+<dd>output filename</dd>
+<dt><strong><code>ndval</code></strong> :&ensp;<code>int</code></dt>
+<dd>no data value</dd>
+</dl>
+<h2 id="return">Return</h2>
+<h2 id="save-geotif-to-local-disk">Save Geotif To Local Disk</h2>
+<h2 id="example">Example</h2>
+<pre><code>arr_to_tif('inp.tif', segments, 'out.tif', ndval=-9999)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def arr_to_tif(raster_f, segments, out_tif=&#39;segment.tif&#39;, ndval=-9999):
+    &#34;&#34;&#34;
+    Save array into GeoTIF file.
+    Args:
+        raster_f (str): input data filename
+        segments (numpy.array): array with values
+        out_tif (str): output filename
+        ndval (int): no data value
+    Return:
+        save GeoTif to local disk
+    ----------
+    Example
+    ----------
+        arr_to_tif(&#39;inp.tif&#39;, segments, &#39;out.tif&#39;, ndval=-9999)
+    &#34;&#34;&#34;
+    # get geospatial profile, will apply for output file
+    with rio.open(raster_f) as src:
+        meta = src.profile
+        nodatavals = src.read_masks(1).astype(&#39;int16&#39;)
+    print(meta)
+
+    # load numpy array if file is given
+    if type(segments) == str:
+        segments = np.load(segments)
+    segments = segments.astype(&#39;int16&#39;)
+    print(segments.dtype)  # check datatype
+
+    nodatavals[nodatavals == 0] = ndval
+    segments[nodatavals == ndval] = nodatavals[nodatavals == ndval]
+
+    out_meta = meta  # modify profile based on numpy array
+    out_meta[&#39;count&#39;] = 1  # output is single band
+    out_meta[&#39;dtype&#39;] = &#39;int16&#39;  # data type is float64
+
+    # write to a raster
+    with rio.open(out_tif, &#39;w&#39;, **out_meta) as dst:
+        dst.write(segments, 1)</code></pre>
+</details>
+</dd>
+<dt id="utils.batch_normalize"><code class="name flex">
+<span>def <span class="ident">batch_normalize</span></span>(<span>batch, axis=(0, 1), c=1e-08)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Normalize batch to zero mean and unit standard deviation.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>img</code></strong> :&ensp;<code>numpy</code> or <code>cupy</code></dt>
+<dd>array (n, w, h, c)</dd>
+<dt><strong><code>axis</code></strong> :&ensp;<code>integer tuple</code></dt>
+<dd>into or tuple of width and height axis</dd>
+<dt><strong><code>c</code></strong> :&ensp;<code>float</code></dt>
+<dd>epsilon to bound given std value</dd>
+</dl>
+<h2 id="return">Return</h2>
+<h2 id="normalize-batch-of-images">Normalize batch of images.</h2>
+<h2 id="example">Example</h2>
+<pre><code>batch_normalize(arr, axis=(0, 1), c=1e-8)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def batch_normalize(batch, axis=(0, 1), c=1e-8):
+    &#34;&#34;&#34;
+    Normalize batch to zero mean and unit standard deviation.
+    Args:
+        img (numpy or cupy): array (n, w, h, c)
+        axis (integer tuple): into or tuple of width and height axis
+        c (float): epsilon to bound given std value
+    Return:
+        Normalize batch of images.
+    ----------
+    Example
+    ----------
+        batch_normalize(arr, axis=(0, 1), c=1e-8)
+    &#34;&#34;&#34;
+    # Note: for loop was proven to be faster than map method
+    for b in range(batch.shape[0]):
+        batch[b, :, :, :] = image_normalize(batch[b, :, :, :], axis=axis, c=c)
+    return batch</code></pre>
+</details>
+</dd>
+<dt id="utils.data_augment"><code class="name flex">
+<span>def <span class="ident">data_augment</span></span>(<span>image, label)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Augment data for semantic segmentation.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>image</code></strong> :&ensp;<code>numpy.array</code></dt>
+<dd>image numpy array</dd>
+<dt><strong><code>label</code></strong> :&ensp;<code>numpy.array</code></dt>
+<dd>image numpy array</dd>
+</dl>
+<h2 id="return">Return</h2>
+<h2 id="augmented-image-and-label">Augmented Image And Label</h2>
+<h2 id="example">Example</h2>
+<pre><code>data_augment(image, label)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def data_augment(image, label):
+    &#34;&#34;&#34;
+    Augment data for semantic segmentation.
+    Args:
+        image (numpy.array): image numpy array
+        label (numpy.array): image numpy array
+    Return:
+        augmented image and label
+    ----------
+    Example
+    ----------
+        data_augment(image, label)
+    &#34;&#34;&#34;
+    # Thanks to the dataset.prefetch(AUTO) statement in the next function
+    # (below), this happens essentially for free on TPU. Data pipeline code
+    # is executed on the CPU part of the TPU, TPU is computing gradients.
+    randint = np.random.randint(1, 7)
+    if randint == 1:  # flip left and right
+        image = tf.image.random_flip_left_right(image)
+        label = tf.image.random_flip_left_right(label)
+    elif randint == 2:  # reverse second dimension
+        image = tf.image.random_flip_up_down(image)
+        label = tf.image.random_flip_up_down(label)
+    elif randint == 3:  # rotate 90 degrees
+        image = tf.image.rot90(image, k=1)
+        label = tf.image.rot90(label, k=1)
+    elif randint == 4:  # rotate 180 degrees
+        image = tf.image.rot90(image, k=2)
+        label = tf.image.rot90(label, k=2)
+    elif randint == 5:  # rotate 270 degrees
+        image = tf.image.rot90(image, k=3)
+        label = tf.image.rot90(label, k=3)
+    return image, label</code></pre>
+</details>
+</dd>
+<dt id="utils.gen_callbacks"><code class="name flex">
+<span>def <span class="ident">gen_callbacks</span></span>(<span>config, metadata)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generate tensorflow callbacks.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>config</code></strong> :&ensp;<code>Config</code></dt>
+<dd>object with configurations</dd>
+<dt><strong><code>metadata</code></strong> :&ensp;<code>dict</code></dt>
+<dd>directory with callback metadata values</dd>
+</dl>
+<h2 id="return">Return</h2>
+<h2 id="list-of-callback-functions">List Of Callback Functions</h2>
+<h2 id="example">Example</h2>
+<pre><code>gen_callbacks(config, metadata)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def gen_callbacks(config, metadata):
+    &#34;&#34;&#34;
+    Generate tensorflow callbacks.
+    Args:
+        config (Config): object with configurations
+        metadata (dict): directory with callback metadata values
+    Return:
+        list of callback functions
+    ----------
+    Example
+    ----------
+        gen_callbacks(config, metadata)
+    &#34;&#34;&#34;
+    callback_list = list()
+
+    if &#39;TensorBoard&#39; in config.CALLBACKS:
+        # Generating tensorboard callbacks
+        tensor = TensorBoard(
+            log_dir=config.MODEL_SAVEDIR, write_graph=True,
+            histogram_freq=metadata[&#39;history_freq&#39;]
+        )
+        callback_list.append(tensor)
+
+    if &#39;CSVLogger&#39; in config.CALLBACKS:
+        # initialize model csv logger callback
+        csv_outfile = config.MODEL_OUTPUT_NAME[:-3] + &#39;_&#39; + \
+            datetime.now().strftime(&#34;%Y%m%d-%H%M%S&#34;)+&#39;.csv&#39;
+        csvlog = CSVLogger(csv_outfile, append=True, separator=&#39;;&#39;)
+        callback_list.append(csvlog)
+
+    if &#39;EarlyStopping&#39; in config.CALLBACKS:
+        # initialize model early stopping callback
+        early_stop = EarlyStopping(
+            patience=metadata[&#39;patience_earlystop&#39;],
+            monitor=metadata[&#39;monitor_earlystop&#39;]
+        )
+        callback_list.append(early_stop)
+
+    if &#39;ModelCheckpoint&#39; in config.CALLBACKS:
+        # initialize model checkpoint callback
+        checkpoint = ModelCheckpoint(
+            filepath=config.MODEL_OUTPUT_NAME[:-3]+&#39;_{epoch:02d}.h5&#39;,
+            monitor=metadata[&#39;monitor_checkpoint&#39;],
+            save_best_only=metadata[&#39;save_best_only&#39;],
+            save_freq=metadata[&#39;save_freq&#39;],
+            verbose=1
+        )
+        callback_list.append(checkpoint)
+
+    return callback_list</code></pre>
+</details>
+</dd>
+<dt id="utils.gen_data_npz"><code class="name flex">
+<span>def <span class="ident">gen_data_npz</span></span>(<span>fimg, img, mask, config, ntiles=1000, save_dir='train')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Extract random patches from cupy arrays.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>fimg</code></strong> :&ensp;<code>str</code></dt>
+<dd>data filename</dd>
+<dt><strong><code>img</code></strong> :&ensp;<code>cupy.array</code></dt>
+<dd>cupy array with data</dd>
+<dt><strong><code>mask</code></strong> :&ensp;<code>cupy.array</code></dt>
+<dd>cupy array with mask</dd>
+<dt><strong><code>save_dir</code></strong> :&ensp;<code>str</code></dt>
+<dd>directory to save output</dd>
+</dl>
+<h2 id="return">Return</h2>
+<h2 id="save-dataset-to-save_dir">save dataset to save_dir.</h2>
+<h2 id="example">Example</h2>
+<pre><code>gen_data_npz('image.tif', arr, mask, config, 8000, 'output')
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def gen_data_npz(fimg, img, mask, config, ntiles=1000, save_dir=&#39;train&#39;):
+    &#34;&#34;&#34;
+    Extract random patches from cupy arrays.
+    Args:
+        fimg (str): data filename
+        img (cupy.array): cupy array with data
+        mask (cupy.array): cupy array with mask
+        save_dir (str): directory to save output
+    Return:
+        save dataset to save_dir.
+    ----------
+    Example
+    ----------
+        gen_data_npz(&#39;image.tif&#39;, arr, mask, config, 8000, &#39;output&#39;)
+    &#34;&#34;&#34;
+    # set dimensions of the input image array, and get desired tile size
+    z_dim, x_dim, y_dim = img.shape
+    tsz = config.TILE_SIZE
+
+    # placeholders for final datasets
+    img_cp = cp.empty((ntiles, tsz, tsz, z_dim), dtype=cp.float32)
+    mask_np = np.empty((ntiles, tsz, tsz, config.N_CLASSES), dtype=np.float16)
+
+    # generate n number of tiles
+    for i in tqdm(range(ntiles)):
+
+        # Generate random integers from image
+        xc = random.randint(0, x_dim - tsz)
+        yc = random.randint(0, y_dim - tsz)
+
+        # verify data is not on nodata region
+        while cp.any(
+            img[:, xc:(xc + tsz), yc:(yc + tsz)] == config.NODATA_VAL
+        ):
+            xc = random.randint(0, x_dim - tsz)
+            yc = random.randint(0, y_dim - tsz)
+
+        # change order to (h, w, c)
+        tile_img = cp.moveaxis(
+            img[:, xc:(xc + tsz), yc:(yc + tsz)], 0, -1
+        )
+
+        # TODO: replace with cuml One-hot encoder on future date when they fix
+        # a bug on the output types. Using to_categorical in the meantime
+        # Converts labels into one-hot encoding labels
+        tile_mask = to_categorical(
+            cp.asnumpy(mask[xc:(xc + tsz), yc:(yc + tsz)]),
+            num_classes=config.N_CLASSES, dtype=&#39;float16&#39;
+        )
+
+        # maybe standardize here? depends on performance of single img vs batch
+        img_cp[i, :, :, :] = tile_img
+        mask_np[i, :, :, :] = tile_mask
+
+    # normalize
+    if config.NORMALIZE:
+        img_cp = img_cp / config.normalization_factor
+
+    # standardize
+    if config.STANDARDIZE:
+        img_cp = batch_normalize(img_cp, axis=(0, 1), c=1e-8)
+
+    # save dataset into local disk, npz format with x and y labels
+    cp.savez(f&#39;{save_dir}/{fimg[:-4]}.npz&#39;, x=img_cp, y=cp.asarray(mask_np))</code></pre>
+</details>
+</dd>
+<dt id="utils.get_tensorslices"><code class="name flex">
+<span>def <span class="ident">get_tensorslices</span></span>(<span>data_dir='', img_id='x', label_id='y')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Getting tensor slices from disk.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>data_dir</code></strong> :&ensp;<code>str</code></dt>
+<dd>directory where data resides</dd>
+<dt><strong><code>img_id</code></strong> :&ensp;<code>str</code></dt>
+<dd>object id from npz file to get data from</dd>
+<dt><strong><code>label_id</code></strong> :&ensp;<code>str</code></dt>
+<dd>object id from npz file to get labels from</dd>
+</dl>
+<h2 id="return">Return</h2>
+<h2 id="get-image-and-label-datasets">Get Image And Label Datasets</h2>
+<h2 id="example">Example</h2>
+<pre><code>get_tensorslices(data_dir='images', img_id='x', label_id='y')
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_tensorslices(data_dir=&#39;&#39;, img_id=&#39;x&#39;, label_id=&#39;y&#39;):
+    &#34;&#34;&#34;
+    Getting tensor slices from disk.
+    Args:
+        data_dir (str): directory where data resides
+        img_id (str): object id from npz file to get data from
+        label_id (str): object id from npz file to get labels from
+    Return:
+        get image and label datasets
+    ----------
+    Example
+    ----------
+        get_tensorslices(data_dir=&#39;images&#39;, img_id=&#39;x&#39;, label_id=&#39;y&#39;)
+    &#34;&#34;&#34;
+    # open files and generate training dataset
+    images = np.array([])
+    labels = np.array([])
+
+    # read all data files from disk
+    for f in glob.glob(f&#39;{data_dir}/*&#39;):
+        with np.load(f) as data:
+            # vstack image batches into memory
+            if images.size:  # if images has elements, vstack new batch
+                images = np.vstack([images, data[img_id]])
+            else:  # if images empty, images equals new batch
+                images = data[img_id]
+            # vstack label batches into memory
+            if labels.size:  # if labels has elements, vstack new batch
+                labels = np.vstack([labels, data[label_id]])
+            else:  # if labels empty, images equals new batch
+                labels = data[label_id]
+    return images, labels</code></pre>
+</details>
+</dd>
+<dt id="utils.get_training_dataset"><code class="name flex">
+<span>def <span class="ident">get_training_dataset</span></span>(<span>dataset, config, do_aug=False, drop_remainder=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return training dataset to feed tf.fit.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>dataset</code></strong> :&ensp;<code>tf.dataset</code></dt>
+<dd>tensorflow dataset</dd>
+<dt><strong><code>config</code></strong> :&ensp;<code>Config</code></dt>
+<dd>Config object with parameters</dd>
+<dt><strong><code>do_aug</code></strong> :&ensp;<code>bool</code></dt>
+<dd>perform augmentation on the fly?</dd>
+<dt><strong><code>drop_remainder</code></strong> :&ensp;<code>bool</code></dt>
+<dd>drop remaineder when value does not match batch</dd>
+</dl>
+<h2 id="return">Return</h2>
+<h2 id="tf-dataset-for-training">Tf Dataset For Training</h2>
+<h2 id="example">Example</h2>
+<pre><code>get_tensorslices(data_dir='images', img_id='x', label_id='y')
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_training_dataset(dataset, config, do_aug=False, drop_remainder=False):
+    &#34;&#34;&#34;
+    Return training dataset to feed tf.fit.
+    Args:
+        dataset (tf.dataset): tensorflow dataset
+        config (Config): Config object with parameters
+        do_aug (bool): perform augmentation on the fly?
+        drop_remainder (bool): drop remaineder when value does not match batch
+    Return:
+        tf dataset for training
+    ----------
+    Example
+    ----------
+        get_tensorslices(data_dir=&#39;images&#39;, img_id=&#39;x&#39;, label_id=&#39;y&#39;)
+    &#34;&#34;&#34;
+    dataset = dataset.map(data_augment, num_parallel_calls=config.AUTOTUNE)
+    dataset = dataset.repeat()
+    dataset = dataset.shuffle(2048)
+    dataset = dataset.batch(config.BATCH_SIZE, drop_remainder=drop_remainder)
+    # prefetch next batch while training (autotune prefetch buffer size)
+    dataset = dataset.prefetch(config.AUTOTUNE)
+    return dataset</code></pre>
+</details>
+</dd>
+<dt id="utils.image_normalize"><code class="name flex">
+<span>def <span class="ident">image_normalize</span></span>(<span>img, axis=(0, 1), c=1e-08)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Normalize to zero mean and unit standard deviation along the given axis.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>img</code></strong> :&ensp;<code>numpy</code> or <code>cupy</code></dt>
+<dd>array (w, h, c)</dd>
+<dt><strong><code>axis</code></strong> :&ensp;<code>integer tuple</code></dt>
+<dd>into or tuple of width and height axis</dd>
+<dt><strong><code>c</code></strong> :&ensp;<code>float</code></dt>
+<dd>epsilon to bound given std value</dd>
+</dl>
+<h2 id="return">Return</h2>
+<h2 id="normalize-single-image">Normalize Single Image</h2>
+<h2 id="example">Example</h2>
+<pre><code>image_normalize(arr, axis=(0, 1), c=1e-8)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def image_normalize(img, axis=(0, 1), c=1e-8):
+    &#34;&#34;&#34;
+    Normalize to zero mean and unit standard deviation along the given axis.
+    Args:
+        img (numpy or cupy): array (w, h, c)
+        axis (integer tuple): into or tuple of width and height axis
+        c (float): epsilon to bound given std value
+    Return:
+        Normalize single image
+    ----------
+    Example
+    ----------
+        image_normalize(arr, axis=(0, 1), c=1e-8)
+    &#34;&#34;&#34;
+    return (img - img.mean(axis)) / (img.std(axis) + c)</code></pre>
+</details>
+</dd>
+<dt id="utils.pad_image"><code class="name flex">
+<span>def <span class="ident">pad_image</span></span>(<span>img, target_size)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Pad an image up to the target size.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>img</code></strong> :&ensp;<code>numpy.arry</code></dt>
+<dd>image array</dd>
+<dt><strong><code>target_size</code></strong> :&ensp;<code>int</code></dt>
+<dd>image target size</dd>
+</dl>
+<h2 id="return">Return</h2>
+<h2 id="padded-image-array">Padded Image Array</h2>
+<h2 id="example">Example</h2>
+<pre><code>pad_image(img, target_size=256)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def pad_image(img, target_size):
+    &#34;&#34;&#34;
+    Pad an image up to the target size.
+    Args:
+        img (numpy.arry): image array
+        target_size (int): image target size
+    Return:
+        padded image array
+    ----------
+    Example
+    ----------
+        pad_image(img, target_size=256)
+    &#34;&#34;&#34;
+    rows_missing = target_size - img.shape[0]
+    cols_missing = target_size - img.shape[1]
+    padded_img = np.pad(
+        img, ((0, rows_missing), (0, cols_missing), (0, 0)), &#39;constant&#39;
+    )
+    return padded_img</code></pre>
+</details>
+</dd>
+<dt id="utils.predict_all"><code class="name flex">
+<span>def <span class="ident">predict_all</span></span>(<span>x, model, config, spline)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Predict full scene using average predictions.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>x</code></strong> :&ensp;<code>numpy.array</code></dt>
+<dd>image array</dd>
+<dt><strong><code>model</code></strong> :&ensp;<code>tf h5</code></dt>
+<dd>image target size</dd>
+</dl>
+<p>config (Config):
+spline (numpy.array):</p>
+<h2 id="return">Return</h2>
+<h2 id="prediction-scene-array-average-probabilities">Prediction Scene Array Average Probabilities</h2>
+<h2 id="example">Example</h2>
+<pre><code>predict_all(x, model, config, spline)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def predict_all(x, model, config, spline):
+    &#34;&#34;&#34;
+    Predict full scene using average predictions.
+    Args:
+        x (numpy.array): image array
+        model (tf h5): image target size
+        config (Config):
+        spline (numpy.array):
+    Return:
+        prediction scene array average probabilities
+    ----------
+    Example
+    ----------
+        predict_all(x, model, config, spline)
+    &#34;&#34;&#34;
+    for i in range(8):
+        if i == 0:  # reverse first dimension
+            x_seg = predict_windowing(
+                x[::-1, :, :], model, config, spline=spline
+            ).transpose([2, 0, 1])
+        elif i == 1:  # reverse second dimension
+            temp = predict_windowing(
+                x[:, ::-1, :], model, config, spline=spline
+            ).transpose([2, 0, 1])
+            x_seg = temp[:, ::-1, :] + x_seg
+        elif i == 2:  # transpose(interchange) first and second dimensions
+            temp = predict_windowing(
+                x.transpose([1, 0, 2]), model, config, spline=spline
+            ).transpose([2, 0, 1])
+            x_seg = temp.transpose(0, 2, 1) + x_seg
+            gc.collect()
+        elif i == 3:
+            temp = predict_windowing(
+                np.rot90(x, 1), model, config, spline=spline
+            )
+            x_seg = np.rot90(temp, -1).transpose([2, 0, 1]) + x_seg
+            gc.collect()
+        elif i == 4:
+            temp = predict_windowing(
+                np.rot90(x, 2), model, config, spline=spline
+            )
+            x_seg = np.rot90(temp, -2).transpose([2, 0, 1]) + x_seg
+        elif i == 5:
+            temp = predict_windowing(
+                np.rot90(x, 3), model, config, spline=spline
+            )
+            x_seg = np.rot90(temp, -3).transpose(2, 0, 1) + x_seg
+        elif i == 6:
+            temp = predict_windowing(
+                x, model, config, spline=spline
+            ).transpose([2, 0, 1])
+            x_seg = temp + x_seg
+        elif i == 7:
+            temp = predict_sliding(
+                x, model, config, spline=spline
+            ).transpose([2, 0, 1])
+            x_seg = temp + x_seg
+            gc.collect()
+
+    del x, temp  # delete arrays
+    x_seg /= 8.0
+    return x_seg.argmax(axis=0)</code></pre>
+</details>
+</dd>
+<dt id="utils.predict_sliding"><code class="name flex">
+<span>def <span class="ident">predict_sliding</span></span>(<span>x, model, config, spline)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Predict scene using sliding windows.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>x</code></strong> :&ensp;<code>numpy.array</code></dt>
+<dd>image array</dd>
+<dt><strong><code>model</code></strong> :&ensp;<code>tf h5</code></dt>
+<dd>image target size</dd>
+</dl>
+<p>config (Config):
+spline (numpy.array):</p>
+<h2 id="return">Return</h2>
+<h2 id="prediction-scene-array-probabilities">Prediction Scene Array Probabilities</h2>
+<h2 id="example">Example</h2>
+<pre><code>predict_windowing(x, model, config, spline)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def predict_sliding(x, model, config, spline):
+    &#34;&#34;&#34;
+    Predict scene using sliding windows.
+    Args:
+        x (numpy.array): image array
+        model (tf h5): image target size
+        config (Config):
+        spline (numpy.array):
+    Return:
+        prediction scene array probabilities
+    ----------
+    Example
+    ----------
+        predict_windowing(x, model, config, spline)
+    &#34;&#34;&#34;
+    stride = math.ceil(config.TILE_SIZE * (1 - config.PRED_OVERLAP))
+
+    tile_rows = max(
+        int(math.ceil((x.shape[0] - config.TILE_SIZE) / stride) + 1), 1
+    )  # strided convolution formula
+
+    tile_cols = max(
+        int(math.ceil((x.shape[1] - config.TILE_SIZE) / stride) + 1), 1
+    )  # strided convolution formula
+
+    print(f&#39;{tile_cols} x {tile_rows} prediction tiles @ stride {stride} px&#39;)
+
+    full_probs = np.zeros((x.shape[0], x.shape[1], config.N_CLASSES))
+
+    count_predictions = \
+        np.zeros((x.shape[0], x.shape[1], config.N_CLASSES))
+
+    tile_counter = 0
+    for row in range(tile_rows):
+        for col in range(tile_cols):
+            x1 = int(col * stride)
+            y1 = int(row * stride)
+            x2 = min(x1 + config.TILE_SIZE, x.shape[1])
+            y2 = min(y1 + config.TILE_SIZE, x.shape[0])
+            x1 = max(int(x2 - config.TILE_SIZE), 0)
+            y1 = max(int(y2 - config.TILE_SIZE), 0)
+
+            img = x[y1:y2, x1:x2]
+            padded_img = pad_image(img, config.TILE_SIZE)
+            tile_counter += 1
+
+            padded_img = np.expand_dims(padded_img, 0)
+
+            # standardize
+            if config.STANDARDIZE:
+                padded_img = batch_normalize(padded_img, axis=(0, 1), c=1e-8)
+
+            imgn = padded_img
+            imgn = imgn.astype(&#39;float32&#39;)
+
+            padded_prediction = model.predict(imgn)[0]
+            prediction = padded_prediction[0:img.shape[0], 0:img.shape[1], :]
+            count_predictions[y1:y2, x1:x2] += 1
+            full_probs[y1:y2, x1:x2] += prediction * spline
+
+    # average the predictions in the overlapping regions
+    full_probs /= count_predictions
+    return full_probs</code></pre>
+</details>
+</dd>
+<dt id="utils.predict_windowing"><code class="name flex">
+<span>def <span class="ident">predict_windowing</span></span>(<span>x, model, config, spline)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Predict scene using windowing mechanisms.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>x</code></strong> :&ensp;<code>numpy.array</code></dt>
+<dd>image array</dd>
+<dt><strong><code>model</code></strong> :&ensp;<code>tf h5</code></dt>
+<dd>image target size</dd>
+</dl>
+<p>config (Config):
+spline (numpy.array):</p>
+<h2 id="return">Return</h2>
+<h2 id="prediction-scene-array-probabilities">Prediction Scene Array Probabilities</h2>
+<h2 id="example">Example</h2>
+<pre><code>predict_windowing(x, model, config, spline)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def predict_windowing(x, model, config, spline):
+    &#34;&#34;&#34;
+    Predict scene using windowing mechanisms.
+    Args:
+        x (numpy.array): image array
+        model (tf h5): image target size
+        config (Config):
+        spline (numpy.array):
+    Return:
+        prediction scene array probabilities
+    ----------
+    Example
+    ----------
+        predict_windowing(x, model, config, spline)
+    &#34;&#34;&#34;
+    print(&#34;Entering windowing prediction&#34;, x.shape)
+
+    img_height = x.shape[0]
+    img_width = x.shape[1]
+    n_channels = x.shape[2]
+
+    # make extended img so that it contains integer number of patches
+    npatches_vertical = math.ceil(img_height / config.TILE_SIZE)
+    npatches_horizontal = math.ceil(img_width / config.TILE_SIZE)
+    extended_height = config.TILE_SIZE * npatches_vertical
+    extended_width = config.TILE_SIZE * npatches_horizontal
+    ext_x = np.zeros(
+        shape=(extended_height, extended_width, n_channels), dtype=np.float32
+    )
+
+    # fill extended image with mirrors:
+    ext_x[:img_height, :img_width, :] = x
+    for i in range(img_height, extended_height):
+        ext_x[i, :, :] = ext_x[2 * img_height - i - 1, :, :]
+    for j in range(img_width, extended_width):
+        ext_x[:, j, :] = ext_x[:, 2 * img_width - j - 1, :]
+
+    # now we assemble all patches in one array
+    patches_list = []  # do vstack later instead of list
+    for i in range(0, npatches_vertical):
+        for j in range(0, npatches_horizontal):
+            x0, x1 = i * config.TILE_SIZE, (i + 1) * config.TILE_SIZE
+            y0, y1 = j * config.TILE_SIZE, (j + 1) * config.TILE_SIZE
+            patches_list.append(ext_x[x0:x1, y0:y1, :])
+
+    patches_array = np.asarray(patches_list)
+
+    # standardize
+    if config.STANDARDIZE:
+        patches_array = batch_normalize(patches_array, axis=(0, 1), c=1e-8)
+
+    # predictions:
+    patches_predict = \
+        model.predict(patches_array, batch_size=config.PRED_BATCH_SIZE)
+
+    prediction = np.zeros(
+        shape=(extended_height, extended_width, config.N_CLASSES),
+        dtype=np.float32
+    )
+
+    # ensemble of patches probabilities
+    for k in range(patches_predict.shape[0]):
+        i = k // npatches_horizontal
+        j = k % npatches_horizontal
+        x0, x1 = i * config.TILE_SIZE, (i + 1) * config.TILE_SIZE
+        y0, y1 = j * config.TILE_SIZE, (j + 1) * config.TILE_SIZE
+        prediction[x0:x1, y0:y1, :] = patches_predict[k, :, :, :] * spline
+
+    return prediction[:img_height, :img_width, :]</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="utils.arr_to_tif" href="#utils.arr_to_tif">arr_to_tif</a></code></li>
+<li><code><a title="utils.batch_normalize" href="#utils.batch_normalize">batch_normalize</a></code></li>
+<li><code><a title="utils.data_augment" href="#utils.data_augment">data_augment</a></code></li>
+<li><code><a title="utils.gen_callbacks" href="#utils.gen_callbacks">gen_callbacks</a></code></li>
+<li><code><a title="utils.gen_data_npz" href="#utils.gen_data_npz">gen_data_npz</a></code></li>
+<li><code><a title="utils.get_tensorslices" href="#utils.get_tensorslices">get_tensorslices</a></code></li>
+<li><code><a title="utils.get_training_dataset" href="#utils.get_training_dataset">get_training_dataset</a></code></li>
+<li><code><a title="utils.image_normalize" href="#utils.image_normalize">image_normalize</a></code></li>
+<li><code><a title="utils.pad_image" href="#utils.pad_image">pad_image</a></code></li>
+<li><code><a title="utils.predict_all" href="#utils.predict_all">predict_all</a></code></li>
+<li><code><a title="utils.predict_sliding" href="#utils.predict_sliding">predict_sliding</a></code></li>
+<li><code><a title="utils.predict_windowing" href="#utils.predict_windowing">predict_windowing</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>
