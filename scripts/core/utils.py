@@ -257,7 +257,7 @@ def gen_callbacks(config, metadata):
     checkpoint = ModelCheckpoint(
         config.MODEL_OUTPUT_NAME[:-3]+'_{epoch:02d}.h5',
         save_best_only=metadata['save_best_only'],
-        period=metadata['period_checkpoint'],
+        save_freq=metadata['period_checkpoint'] * config.BATCH_SIZE,
         verbose=2
     )
     return [csvlog, early_stop, checkpoint, tensor]
