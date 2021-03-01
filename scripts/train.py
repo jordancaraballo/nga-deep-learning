@@ -58,6 +58,11 @@ if config.XLA_ACCELERATE:
     tf.config.optimizer.set_jit(True)
     print('Accelerated Linear Algebra enabled')
 
+# data lives in memory, use in memory multi-worker options
+options = tf.data.Options()
+options.experimental_distribute.auto_shard_policy = \
+    tf.data.experimental.AutoShardPolicy.DATA
+
 
 # ---------------------------------------------------------------------------
 # script train.py
