@@ -168,7 +168,8 @@ class Configuration:
         self.MODEL_OUTPUT_NAME = f'{self.MODEL_SAVEDIR}/{self.MODEL_NAME}.h5'
 
         # Training extensions - Callbacks
-        self.CALLBACKS = ['ModelCheckpoint', 'CSVLogger', 'EarlyStopping', 'TensorBoard']
+        self.CALLBACKS = \
+            ['ModelCheckpoint', 'CSVLogger', 'EarlyStopping', 'TensorBoard']
 
         self.CALLBACKS_METADATA = {
             'patience_earlystop': 20,

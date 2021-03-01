@@ -4,13 +4,11 @@
 # --------------------------------------------------------------------------
 import os                # system modifications
 import sys               # system modifications
-import glob              # get global files from directory
 import time              # tracking time
 import numpy as np       # for arrays modifications
 import cupy as cp        # for arrays modifications
 import tensorflow as tf  # deep learning framework
 
-from datetime import datetime                # time library for filenames
 from core.unet import unet_batchnorm         # unet network to work with
 from core.utils import get_training_dataset  # getting training dataset
 from core.utils import get_tensorslices      # getting tensor slices
@@ -91,7 +89,7 @@ def main():
     NUM_VALIDATION_IMAGES = val_images.shape[0]
     STEPS_PER_EPOCH = NUM_TRAINING_IMAGES // config.BATCH_SIZE
 
-    print(f'{NUM_TRAINING_IMAGES} training images'
+    print(f'{NUM_TRAINING_IMAGES} training images')
     print(f'{NUM_VALIDATION_IMAGES} validation images')
 
     # generate training dataset
