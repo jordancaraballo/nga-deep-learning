@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>indices API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>indices</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import xarray as xr  # read rasters
+import numpy as np
+
+try:
+    import cupy as cp
+    HAS_GPU = True
+except ImportError:
+    HAS_GPU = False
+
+__author__ = &#34;Jordan A Caraballo-Vega, Science Data Processing Branch&#34;
+__email__ = &#34;jordan.a.caraballo-vega@nasa.gov&#34;
+__status__ = &#34;Development&#34;
+
+# -------------------------------------------------------------------------------
+# module indices
+# This class calculates remote sensing indices given xarray or numpy objects.
+# Note: Most of our imagery uses the following set of bands.
+# 8 band: [&#39;CoastalBlue&#39;, &#39;Blue&#39;, &#39;Green&#39;, &#39;Yellow&#39;,
+#          &#39;Red&#39;, &#39;RedEdge&#39;, &#39;NIR1&#39;, &#39;NIR2&#39;]
+# 4 band: [&#39;Red&#39;, &#39;Green&#39;, &#39;Blue&#39;, &#39;NIR1&#39;, &#39;HOM1&#39;, &#39;HOM2&#39;]
+# -------------------------------------------------------------------------------
+
+# -------------------------------------------------------------------------------
+# Module Methods
+# -------------------------------------------------------------------------------
+
+
+def addindices(rastarr, bands, indices, factor=1.0) -&gt; np.array:
+    &#34;&#34;&#34;
+    :param rastarr: xarray or numpy array object in the form (c, h, w)
+    :param bands: list with strings of bands in the raster
+    :param indices: indices to calculate and append to the raster
+    :param factor: factor used for toa imagery
+    :return: raster with updated bands list
+    &#34;&#34;&#34;
+    nbands = len(bands)  # get initial number of bands
+    for indices_function in indices:  # iterate over each new band
+        nbands += 1  # counter for number of bands
+
+        # calculate band (indices)
+        band, bandid = indices_function(rastarr, bands=bands, factor=factor)
+        bands.append(bandid)  # append new band id to list of bands
+        band.coords[&#39;band&#39;] = [nbands]  # add band indices to raster
+        rastarr = xr.concat([rastarr, band], dim=&#39;band&#39;)  # concat new band
+
+    # update raster metadata, xarray attributes
+    rastarr.attrs[&#39;scales&#39;] = [rastarr.attrs[&#39;scales&#39;][0]] * nbands
+    rastarr.attrs[&#39;offsets&#39;] = [rastarr.attrs[&#39;offsets&#39;][0]] * nbands
+    return rastarr, bands
+
+
+# Difference Vegetation Index (DVI), type int16
+def dvi(data, bands, factor=1.0, vtype=&#39;int16&#39;) -&gt; np.array:
+    &#34;&#34;&#34;
+    :param data: xarray or numpy array object in the form (c, h, w)
+    :param bands: list with strings of bands in the raster
+    :param factor: factor used for toa imagery
+    :return: new band with DVI calculated
+    &#34;&#34;&#34;
+    # 8 and 4 band imagery: DVI := NIR1 - Red
+    NIR1, Red = bands.index(&#39;NIR1&#39;), bands.index(&#39;Red&#39;)
+    return ((data[NIR1, :, :] / factor) - (data[Red, :, :] / factor)
+            ).expand_dims(dim=&#34;band&#34;, axis=0).fillna(0).astype(vtype), &#34;DVI&#34;
+
+
+# Normalized Difference Vegetation Index (NDVI)
+# range from +1.0 to -1.0, type float64
+def ndvi(data, bands, factor=1.0, vtype=&#39;float64&#39;) -&gt; np.array:
+    &#34;&#34;&#34;
+    :param data: xarray or numpy array object in the form (c, h, w)
+    :param bands: number of the original bands of the raster
+    :param factor: factor used for toa imagery
+    :return: new band with NDVI calculated
+    &#34;&#34;&#34;
+    # 8 and 4 band imagery: NDVI := (NIR - Red) / (NIR + RED)
+    NIR1, Red = bands.index(&#39;NIR1&#39;), bands.index(&#39;Red&#39;)
+    return (((data[NIR1, :, :] / factor) - (data[Red, :, :] / factor)) /
+            ((data[NIR1, :, :] / factor) + (data[Red, :, :] / factor))
+            ).expand_dims(dim=&#34;band&#34;, axis=0).fillna(0).astype(vtype), &#34;NDVI&#34;
+
+
+# Forest Discrimination Index (FDI), type int16
+def fdi(data, bands, factor=1.0, vtype=&#39;int16&#39;, device=&#39;CPU&#39;) -&gt; np.array:
+    &#34;&#34;&#34;
+    GPU Support
+    :param data: xarray or numpy array object in the form (c, h, w)
+    :param bands: number of the original bands of the raster
+    :param factor: factor used for toa imagery
+    :return: new band with FDI calculated
+    &#34;&#34;&#34;
+    # 8 band imagery: FDI := NIR2 - (RedEdge + Blue)
+    # 4 band imagery: FDI := NIR1 - (Red + Blue)
+    NIR = bands.index(&#39;NIR2&#39;) if &#39;NIR2&#39; in bands else bands.index(&#39;NIR1&#39;)
+    RED = bands.index(&#39;RedEdge&#39;) if &#39;RedEdge&#39; in bands else bands.index(&#39;Red&#39;)
+    BLUE = bands.index(&#39;Blue&#39;)
+
+    fdi = data[NIR, :, :] - (data[RED, :, :] + data[BLUE, :, :])
+    if device == &#39;CPU&#39;:
+        fdi = fdi.expand_dims(dim=&#34;band&#34;, axis=0).fillna(0).astype(vtype)
+    elif device == &#39;GPU&#39;:
+        fdi = cp.nan_to_num(cp.expand_dims(fdi, 0))
+    else:
+        raise RuntimeError(&#34;{} device not supported&#34;.format(device))
+    return fdi, &#34;FDI&#34;
+
+
+# Shadow Index (SI), type int16
+def si(data, bands, factor=1.0, vtype=&#39;int16&#39;, device=&#39;CPU&#39;) -&gt; np.array:
+    &#34;&#34;&#34;
+    GPU Support
+    :param data: xarray or numpy array object in the form (c, h, w)
+    :param bands: number of the original bands of the raster
+    :param factor: factor used for toa imagery
+    :return: new band with SI calculated
+    &#34;&#34;&#34;
+    # 8 and 4 band imagery:
+    # SI := ((factor - Blue) * (factor - Green) * (factor - Red)) ** (1.0 / 3)
+    BLUE, GREEN = bands.index(&#39;Blue&#39;), bands.index(&#39;Green&#39;)
+    RED = bands.index(&#39;Red&#39;)
+
+    si = ((factor - data[BLUE, :, :]) * (factor - data[GREEN, :, :]) *
+          (factor - data[RED, :, :])) ** (1.0/3.0)
+
+    if device == &#39;CPU&#39;:
+        si = si.expand_dims(dim=&#34;band&#34;, axis=0).fillna(0).astype(vtype)
+    elif device == &#39;GPU&#39;:
+        si = cp.nan_to_num(cp.expand_dims(si, 0))
+    else:
+        raise RuntimeError(&#34;{} device not supported&#34;.format(device))
+    return si, &#34;SI&#34;
+
+
+# Normalized Difference Water Index (DWI), type int16
+def dwi(data, bands, factor=1.0, vtype=&#39;int16&#39;) -&gt; np.array:
+    &#34;&#34;&#34;
+    :param data: xarray or numpy array object in the form (c, h, w)
+    :param bands: number of the original bands of the raster
+    :param factor: factor used for toa imagery
+    :return: new band with DWI calculated
+    &#34;&#34;&#34;
+    # 8 and 4 band imagery: DWI := factor * (Green - NIR1)
+    Green, NIR1 = bands.index(&#39;Green&#39;), bands.index(&#39;NIR1&#39;)
+    return (factor * (data[Green, :, :] - data[NIR1, :, :])
+            ).expand_dims(dim=&#34;band&#34;, axis=0).fillna(0).astype(vtype), &#34;DWI&#34;
+
+
+# Normalized Difference Water Index (NDWI), type int16
+def ndwi(data, bands, factor=1.0, vtype=&#39;int16&#39;, device=&#39;CPU&#39;) -&gt; np.array:
+    &#34;&#34;&#34;
+    GPU Support
+    :param data: xarray or numpy array object in the form (c, h, w)
+    :param bands: number of the original bands of the raster
+    :param factor: factor used for toa imagery
+    :return: new band with SI calculated
+    &#34;&#34;&#34;
+    # 8 and 4 band imagery: NDWI := factor * (Green - NIR1) / (Green + NIR1)
+    GREEN, NIR1 = bands.index(&#39;Green&#39;), bands.index(&#39;NIR1&#39;)
+
+    ndwi = factor * ((data[GREEN, :, :] - data[NIR1, :, :])
+                     / (data[GREEN, :, :] + data[NIR1, :, :]))
+
+    if device == &#39;CPU&#39;:
+        ndwi = ndwi.expand_dims(dim=&#34;band&#34;, axis=0).fillna(0).astype(vtype)
+    elif device == &#39;GPU&#39;:
+        ndwi = cp.nan_to_num(cp.expand_dims(ndwi, 0))
+    else:
+        raise RuntimeError(&#34;{} device not supported&#34;.format(device))
+    return ndwi, &#34;NDWI&#34;
+
+
+# Shadow Index (SI), type float64
+def cs1(data, bands, factor=1.0, vtype=&#39;float64&#39;) -&gt; np.array:
+    &#34;&#34;&#34;
+    :param data: xarray or numpy array object in the form (c, h, w)
+    :param bands: number of the original bands of the raster
+    :param factor: factor used for toa imagery
+    :return: new band with SI calculated
+    &#34;&#34;&#34;
+    # 8 and 4 band imagery: CS1 := (3. * NIR1) / (Blue + Green + Red)
+    NIR1, Blue = bands.index(&#39;NIR1&#39;), bands.index(&#39;Blue&#39;)
+    Green, Red = bands.index(&#39;Green&#39;), bands.index(&#39;Red&#39;)
+    return ((3.0 * (data[NIR1, :, :]/factor)) / (data[Blue, :, :]
+            + data[Green, :, :] + data[Red, :, :])
+            ).expand_dims(dim=&#34;band&#34;, axis=0).fillna(0).astype(vtype), &#34;CS1&#34;
+
+
+# Shadow Index (SI)
+def cs2(data, bands, factor=1.0, vtype=&#39;int16&#39;) -&gt; np.array:
+    &#34;&#34;&#34;
+    :param data: xarray or numpy array object in the form (c, h, w)
+    :param bands: number of the original bands of the raster
+    :param factor: factor used for toa imagery
+    :return: new band with CS2 calculated
+    &#34;&#34;&#34;
+    # 8 and 4 band imagery: CS2 := (Blue + Green + Red + NIR1) / 4.
+    NIR1, Blue = bands.index(&#39;NIR1&#39;), bands.index(&#39;Blue&#39;)
+    Green, Red = bands.index(&#39;Green&#39;), bands.index(&#39;Red&#39;)
+    return ((data[Blue, :, :] + data[Green, :, :] + data[Red, :, :]
+            + data[NIR1, :, :]) / 4.0
+            ).expand_dims(dim=&#34;band&#34;, axis=0).fillna(0).astype(vtype), &#34;CS2&#34;</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="indices.addindices"><code class="name flex">
+<span>def <span class="ident">addindices</span></span>(<span>rastarr, bands, indices, factor=1.0) ‑> <built-in function array></span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param rastarr: xarray or numpy array object in the form (c, h, w)
+:param bands: list with strings of bands in the raster
+:param indices: indices to calculate and append to the raster
+:param factor: factor used for toa imagery
+:return: raster with updated bands list</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def addindices(rastarr, bands, indices, factor=1.0) -&gt; np.array:
+    &#34;&#34;&#34;
+    :param rastarr: xarray or numpy array object in the form (c, h, w)
+    :param bands: list with strings of bands in the raster
+    :param indices: indices to calculate and append to the raster
+    :param factor: factor used for toa imagery
+    :return: raster with updated bands list
+    &#34;&#34;&#34;
+    nbands = len(bands)  # get initial number of bands
+    for indices_function in indices:  # iterate over each new band
+        nbands += 1  # counter for number of bands
+
+        # calculate band (indices)
+        band, bandid = indices_function(rastarr, bands=bands, factor=factor)
+        bands.append(bandid)  # append new band id to list of bands
+        band.coords[&#39;band&#39;] = [nbands]  # add band indices to raster
+        rastarr = xr.concat([rastarr, band], dim=&#39;band&#39;)  # concat new band
+
+    # update raster metadata, xarray attributes
+    rastarr.attrs[&#39;scales&#39;] = [rastarr.attrs[&#39;scales&#39;][0]] * nbands
+    rastarr.attrs[&#39;offsets&#39;] = [rastarr.attrs[&#39;offsets&#39;][0]] * nbands
+    return rastarr, bands</code></pre>
+</details>
+</dd>
+<dt id="indices.cs1"><code class="name flex">
+<span>def <span class="ident">cs1</span></span>(<span>data, bands, factor=1.0, vtype='float64') ‑> <built-in function array></span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param data: xarray or numpy array object in the form (c, h, w)
+:param bands: number of the original bands of the raster
+:param factor: factor used for toa imagery
+:return: new band with SI calculated</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cs1(data, bands, factor=1.0, vtype=&#39;float64&#39;) -&gt; np.array:
+    &#34;&#34;&#34;
+    :param data: xarray or numpy array object in the form (c, h, w)
+    :param bands: number of the original bands of the raster
+    :param factor: factor used for toa imagery
+    :return: new band with SI calculated
+    &#34;&#34;&#34;
+    # 8 and 4 band imagery: CS1 := (3. * NIR1) / (Blue + Green + Red)
+    NIR1, Blue = bands.index(&#39;NIR1&#39;), bands.index(&#39;Blue&#39;)
+    Green, Red = bands.index(&#39;Green&#39;), bands.index(&#39;Red&#39;)
+    return ((3.0 * (data[NIR1, :, :]/factor)) / (data[Blue, :, :]
+            + data[Green, :, :] + data[Red, :, :])
+            ).expand_dims(dim=&#34;band&#34;, axis=0).fillna(0).astype(vtype), &#34;CS1&#34;</code></pre>
+</details>
+</dd>
+<dt id="indices.cs2"><code class="name flex">
+<span>def <span class="ident">cs2</span></span>(<span>data, bands, factor=1.0, vtype='int16') ‑> <built-in function array></span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param data: xarray or numpy array object in the form (c, h, w)
+:param bands: number of the original bands of the raster
+:param factor: factor used for toa imagery
+:return: new band with CS2 calculated</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cs2(data, bands, factor=1.0, vtype=&#39;int16&#39;) -&gt; np.array:
+    &#34;&#34;&#34;
+    :param data: xarray or numpy array object in the form (c, h, w)
+    :param bands: number of the original bands of the raster
+    :param factor: factor used for toa imagery
+    :return: new band with CS2 calculated
+    &#34;&#34;&#34;
+    # 8 and 4 band imagery: CS2 := (Blue + Green + Red + NIR1) / 4.
+    NIR1, Blue = bands.index(&#39;NIR1&#39;), bands.index(&#39;Blue&#39;)
+    Green, Red = bands.index(&#39;Green&#39;), bands.index(&#39;Red&#39;)
+    return ((data[Blue, :, :] + data[Green, :, :] + data[Red, :, :]
+            + data[NIR1, :, :]) / 4.0
+            ).expand_dims(dim=&#34;band&#34;, axis=0).fillna(0).astype(vtype), &#34;CS2&#34;</code></pre>
+</details>
+</dd>
+<dt id="indices.dvi"><code class="name flex">
+<span>def <span class="ident">dvi</span></span>(<span>data, bands, factor=1.0, vtype='int16') ‑> <built-in function array></span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param data: xarray or numpy array object in the form (c, h, w)
+:param bands: list with strings of bands in the raster
+:param factor: factor used for toa imagery
+:return: new band with DVI calculated</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def dvi(data, bands, factor=1.0, vtype=&#39;int16&#39;) -&gt; np.array:
+    &#34;&#34;&#34;
+    :param data: xarray or numpy array object in the form (c, h, w)
+    :param bands: list with strings of bands in the raster
+    :param factor: factor used for toa imagery
+    :return: new band with DVI calculated
+    &#34;&#34;&#34;
+    # 8 and 4 band imagery: DVI := NIR1 - Red
+    NIR1, Red = bands.index(&#39;NIR1&#39;), bands.index(&#39;Red&#39;)
+    return ((data[NIR1, :, :] / factor) - (data[Red, :, :] / factor)
+            ).expand_dims(dim=&#34;band&#34;, axis=0).fillna(0).astype(vtype), &#34;DVI&#34;</code></pre>
+</details>
+</dd>
+<dt id="indices.dwi"><code class="name flex">
+<span>def <span class="ident">dwi</span></span>(<span>data, bands, factor=1.0, vtype='int16') ‑> <built-in function array></span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param data: xarray or numpy array object in the form (c, h, w)
+:param bands: number of the original bands of the raster
+:param factor: factor used for toa imagery
+:return: new band with DWI calculated</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def dwi(data, bands, factor=1.0, vtype=&#39;int16&#39;) -&gt; np.array:
+    &#34;&#34;&#34;
+    :param data: xarray or numpy array object in the form (c, h, w)
+    :param bands: number of the original bands of the raster
+    :param factor: factor used for toa imagery
+    :return: new band with DWI calculated
+    &#34;&#34;&#34;
+    # 8 and 4 band imagery: DWI := factor * (Green - NIR1)
+    Green, NIR1 = bands.index(&#39;Green&#39;), bands.index(&#39;NIR1&#39;)
+    return (factor * (data[Green, :, :] - data[NIR1, :, :])
+            ).expand_dims(dim=&#34;band&#34;, axis=0).fillna(0).astype(vtype), &#34;DWI&#34;</code></pre>
+</details>
+</dd>
+<dt id="indices.fdi"><code class="name flex">
+<span>def <span class="ident">fdi</span></span>(<span>data, bands, factor=1.0, vtype='int16', device='CPU') ‑> <built-in function array></span>
+</code></dt>
+<dd>
+<div class="desc"><p>GPU Support
+:param data: xarray or numpy array object in the form (c, h, w)
+:param bands: number of the original bands of the raster
+:param factor: factor used for toa imagery
+:return: new band with FDI calculated</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def fdi(data, bands, factor=1.0, vtype=&#39;int16&#39;, device=&#39;CPU&#39;) -&gt; np.array:
+    &#34;&#34;&#34;
+    GPU Support
+    :param data: xarray or numpy array object in the form (c, h, w)
+    :param bands: number of the original bands of the raster
+    :param factor: factor used for toa imagery
+    :return: new band with FDI calculated
+    &#34;&#34;&#34;
+    # 8 band imagery: FDI := NIR2 - (RedEdge + Blue)
+    # 4 band imagery: FDI := NIR1 - (Red + Blue)
+    NIR = bands.index(&#39;NIR2&#39;) if &#39;NIR2&#39; in bands else bands.index(&#39;NIR1&#39;)
+    RED = bands.index(&#39;RedEdge&#39;) if &#39;RedEdge&#39; in bands else bands.index(&#39;Red&#39;)
+    BLUE = bands.index(&#39;Blue&#39;)
+
+    fdi = data[NIR, :, :] - (data[RED, :, :] + data[BLUE, :, :])
+    if device == &#39;CPU&#39;:
+        fdi = fdi.expand_dims(dim=&#34;band&#34;, axis=0).fillna(0).astype(vtype)
+    elif device == &#39;GPU&#39;:
+        fdi = cp.nan_to_num(cp.expand_dims(fdi, 0))
+    else:
+        raise RuntimeError(&#34;{} device not supported&#34;.format(device))
+    return fdi, &#34;FDI&#34;</code></pre>
+</details>
+</dd>
+<dt id="indices.ndvi"><code class="name flex">
+<span>def <span class="ident">ndvi</span></span>(<span>data, bands, factor=1.0, vtype='float64') ‑> <built-in function array></span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param data: xarray or numpy array object in the form (c, h, w)
+:param bands: number of the original bands of the raster
+:param factor: factor used for toa imagery
+:return: new band with NDVI calculated</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ndvi(data, bands, factor=1.0, vtype=&#39;float64&#39;) -&gt; np.array:
+    &#34;&#34;&#34;
+    :param data: xarray or numpy array object in the form (c, h, w)
+    :param bands: number of the original bands of the raster
+    :param factor: factor used for toa imagery
+    :return: new band with NDVI calculated
+    &#34;&#34;&#34;
+    # 8 and 4 band imagery: NDVI := (NIR - Red) / (NIR + RED)
+    NIR1, Red = bands.index(&#39;NIR1&#39;), bands.index(&#39;Red&#39;)
+    return (((data[NIR1, :, :] / factor) - (data[Red, :, :] / factor)) /
+            ((data[NIR1, :, :] / factor) + (data[Red, :, :] / factor))
+            ).expand_dims(dim=&#34;band&#34;, axis=0).fillna(0).astype(vtype), &#34;NDVI&#34;</code></pre>
+</details>
+</dd>
+<dt id="indices.ndwi"><code class="name flex">
+<span>def <span class="ident">ndwi</span></span>(<span>data, bands, factor=1.0, vtype='int16', device='CPU') ‑> <built-in function array></span>
+</code></dt>
+<dd>
+<div class="desc"><p>GPU Support
+:param data: xarray or numpy array object in the form (c, h, w)
+:param bands: number of the original bands of the raster
+:param factor: factor used for toa imagery
+:return: new band with SI calculated</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ndwi(data, bands, factor=1.0, vtype=&#39;int16&#39;, device=&#39;CPU&#39;) -&gt; np.array:
+    &#34;&#34;&#34;
+    GPU Support
+    :param data: xarray or numpy array object in the form (c, h, w)
+    :param bands: number of the original bands of the raster
+    :param factor: factor used for toa imagery
+    :return: new band with SI calculated
+    &#34;&#34;&#34;
+    # 8 and 4 band imagery: NDWI := factor * (Green - NIR1) / (Green + NIR1)
+    GREEN, NIR1 = bands.index(&#39;Green&#39;), bands.index(&#39;NIR1&#39;)
+
+    ndwi = factor * ((data[GREEN, :, :] - data[NIR1, :, :])
+                     / (data[GREEN, :, :] + data[NIR1, :, :]))
+
+    if device == &#39;CPU&#39;:
+        ndwi = ndwi.expand_dims(dim=&#34;band&#34;, axis=0).fillna(0).astype(vtype)
+    elif device == &#39;GPU&#39;:
+        ndwi = cp.nan_to_num(cp.expand_dims(ndwi, 0))
+    else:
+        raise RuntimeError(&#34;{} device not supported&#34;.format(device))
+    return ndwi, &#34;NDWI&#34;</code></pre>
+</details>
+</dd>
+<dt id="indices.si"><code class="name flex">
+<span>def <span class="ident">si</span></span>(<span>data, bands, factor=1.0, vtype='int16', device='CPU') ‑> <built-in function array></span>
+</code></dt>
+<dd>
+<div class="desc"><p>GPU Support
+:param data: xarray or numpy array object in the form (c, h, w)
+:param bands: number of the original bands of the raster
+:param factor: factor used for toa imagery
+:return: new band with SI calculated</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def si(data, bands, factor=1.0, vtype=&#39;int16&#39;, device=&#39;CPU&#39;) -&gt; np.array:
+    &#34;&#34;&#34;
+    GPU Support
+    :param data: xarray or numpy array object in the form (c, h, w)
+    :param bands: number of the original bands of the raster
+    :param factor: factor used for toa imagery
+    :return: new band with SI calculated
+    &#34;&#34;&#34;
+    # 8 and 4 band imagery:
+    # SI := ((factor - Blue) * (factor - Green) * (factor - Red)) ** (1.0 / 3)
+    BLUE, GREEN = bands.index(&#39;Blue&#39;), bands.index(&#39;Green&#39;)
+    RED = bands.index(&#39;Red&#39;)
+
+    si = ((factor - data[BLUE, :, :]) * (factor - data[GREEN, :, :]) *
+          (factor - data[RED, :, :])) ** (1.0/3.0)
+
+    if device == &#39;CPU&#39;:
+        si = si.expand_dims(dim=&#34;band&#34;, axis=0).fillna(0).astype(vtype)
+    elif device == &#39;GPU&#39;:
+        si = cp.nan_to_num(cp.expand_dims(si, 0))
+    else:
+        raise RuntimeError(&#34;{} device not supported&#34;.format(device))
+    return si, &#34;SI&#34;</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="two-column">
+<li><code><a title="indices.addindices" href="#indices.addindices">addindices</a></code></li>
+<li><code><a title="indices.cs1" href="#indices.cs1">cs1</a></code></li>
+<li><code><a title="indices.cs2" href="#indices.cs2">cs2</a></code></li>
+<li><code><a title="indices.dvi" href="#indices.dvi">dvi</a></code></li>
+<li><code><a title="indices.dwi" href="#indices.dwi">dwi</a></code></li>
+<li><code><a title="indices.fdi" href="#indices.fdi">fdi</a></code></li>
+<li><code><a title="indices.ndvi" href="#indices.ndvi">ndvi</a></code></li>
+<li><code><a title="indices.ndwi" href="#indices.ndwi">ndwi</a></code></li>
+<li><code><a title="indices.si" href="#indices.si">si</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>
