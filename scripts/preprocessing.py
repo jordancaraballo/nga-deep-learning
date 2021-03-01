@@ -11,7 +11,8 @@ import xarray as xr      # read rasters
 import tensorflow as tf  # deep learning framework
 
 # Enabling mixed precission
-from tensorflow.keras.mixed_precision import experimental as mixed_precision
+# from tensorflow.keras.mixed_precision import experimental as mixed_precision
+from tensorflow.keras import mixed_precision
 
 # Include core functions required
 from core.utils import gen_data_npz
@@ -47,8 +48,8 @@ if config.MIRROR_STRATEGY:
     print('Multi-GPU enabled')
 
 if config.MIXED_PRECISION:
-    policy = tf.keras.mixed_precision.experimental.Policy('mixed_float16')
-    mixed_precision.set_policy(policy)
+    policy = mixed_precision.Policy('mixed_float16')
+    mixed_precision.set_global_policy(policy)
     print('Mixed precision enabled')
 
 if config.XLA_ACCELERATE:

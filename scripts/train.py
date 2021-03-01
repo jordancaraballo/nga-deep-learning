@@ -15,7 +15,8 @@ from core.utils import get_tensorslices      # getting tensor slices
 from core.utils import gen_callbacks         # generate callbacks
 
 # tensorflow imports
-from tensorflow.keras.mixed_precision import experimental as mixed_precision
+# from tensorflow.keras.mixed_precision import experimental as mixed_precision
+from tensorflow.keras import mixed_precision
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.optimizers import Adadelta
 
@@ -49,8 +50,8 @@ if config.MIRROR_STRATEGY:
     print('Multi-GPU enabled')
 
 if config.MIXED_PRECISION:
-    policy = tf.keras.mixed_precision.experimental.Policy('mixed_float16')
-    mixed_precision.set_policy(policy)
+    policy = mixed_precision.Policy('mixed_float16')
+    mixed_precision.set_global_policy(policy)
     print('Mixed precision enabled')
 
 if config.XLA_ACCELERATE:
@@ -115,6 +116,9 @@ def main():
             optimizer = Adam(lr=config.MODEL_METADATA['lr'])
         else:
             sys.exit('Optimizer provided is not supported.')
+
+        # enabling mixed precision to avoid underflow
+        optimizer = mixed_precision.LossScaleOptimizer(optimizer)
 
         # compile model to start training
         model.compile(
