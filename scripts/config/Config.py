@@ -130,7 +130,7 @@ class Configuration:
         # self.BATCH_SIZE: batch size to feed the network
         # 128 bsize works well with 32GB RAM GPU
         self.BATCH_SIZE = 128
-        self.VAL_BATCH_SIZE = 512
+        self.VAL_BATCH_SIZE = 1024
 
         # self.TRAIN_ROOT_INPDIR: root dir where train and val data resides
         self.TRAIN_ROOT_INPDIR = self.PREP_ROOT_OUTDIR
@@ -147,12 +147,12 @@ class Configuration:
             'network': 'unet',
             'network_maps': [64, 128, 256, 512, 1024],
             'lr': 0.0001,
-            'bsize': 128,
             'momentum': 0.90,
             'gradient': 0.95,
             'loss': 'categorical_crossentropy',
             'optimizer_name': 'Adadelta',
-            'metrics': ['accuracy']
+            'metrics': ['accuracy'],
+            'do_aug': True
         }
 
         # Model description and output directory
@@ -163,8 +163,14 @@ class Configuration:
         # self.MODEL_SAVEDIR: directory to save trained models
         # self.MODEL_SAVEDIR = f'/att/projects/Vietnam/unet/{self.MODEL_NAME}'
 
+        
+        
+        
         self.MODEL_SAVEDIR = f'{self.PREP_ROOT_OUTDIR}/{self.MODEL_NAME}'
 
+        
+        
+        
         # self.MODEL_OUTPUT_NAME: output name for model to be saved
         self.MODEL_OUTPUT_NAME = f'{self.MODEL_SAVEDIR}/{self.MODEL_NAME}.h5'
 
@@ -178,8 +184,8 @@ class Configuration:
             'monitor_earlystop': 'val_loss',
             'monitor_checkpoint': 'val_loss',
             'save_freq': 'epoch',
-            'factor_plateu': 0.2,
-            'min_lr_plateu': 0.0,
+            'factor_plateu': 0.20,
+            'min_lr_plateu': 0.00,
             'history_freq': 5,
             'save_best_only': True
         }
@@ -198,8 +204,14 @@ class Configuration:
         self.PRED_BATCH_SIZE = 128
 
         # self.PRED_FILENAMES: regex to flag all files to predict
-        self.PRED_FILENAMES = '/att/projects/Vietnam/images/*.tif'
+        # self.PRED_FILENAMES = '/att/projects/Vietnam/images/*.tif'
+        # self.PRED_FILENAMES = glob.glob(self.PRED_FILENAMES)
+
+
+        self.PRED_FILENAMES = '/att/gpfsfs/atrepo01/ILAB/projects/Vietnam/Jordan/data_keelin/*.tif'
         self.PRED_FILENAMES = glob.glob(self.PRED_FILENAMES)
+
+
 
         # self.PRED_OVERLAP: overlap between tiles to predict
         self.PRED_OVERLAP = 0.25
@@ -208,15 +220,15 @@ class Configuration:
         self.PRED_WINDOW_SIZE = [8192, 8192]
 
         # self.MODEL_STR: specific model to open based on epoch
-        self.MODEL_STR = f"{self.MODEL_NAME}_1000.h5"
+        self.MODEL_STR = f"{self.MODEL_NAME}_66.h5"
 
         # self.MODEL_NAME: model path and model name to open
         self.MODEL_NAME = f'{self.MODEL_SAVEDIR}/{self.MODEL_STR}'
 
         # self.PRED_SAVE_DIR: directory to save GeoTIF predictions on
         self.PRED_SAVE_DIR = \
-            '/att/projects/Vietnam/predictions/{self.MODEL_STR}/images'
+            f'{self.PREP_ROOT_OUTDIR}/predictions/{self.MODEL_STR}/images'
 
         # self.PRED_SEG_SAVE_DIR: directory to save numpy predictions on
         self.PRED_SEG_SAVE_DIR = \
-            '/att/projects/Vietnam/predictions/{self.MODEL_STR}/segments'
+            f'{self.PREP_ROOT_OUTDIR}/predictions/{self.MODEL_STR}/segments'

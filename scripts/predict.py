@@ -1,26 +1,27 @@
-import os
-import glob
-import time
-from tqdm import tqdm
-import gc
+# --------------------------------------------------------------------------
+# Prediction from TF model and NGA data. This assumes you provide
+# a configuration file with required parameters and files.
+# --------------------------------------------------------------------------
+import os                # system modifications
+import time              # tracking time
+from tqdm import tqdm    # for local progress bar
+import numpy as np       # for arrays modifications
+import cupy as cp        # for arrays modifications
+import tensorflow as tf  # deep learning framework
+import xarray as xr      # read rasters
 
-import numpy as np
-import cupy as cp
-import rasterio as rio
-import xarray as xr
-
-import tensorflow as tf
+# tensorflow imports
+# from tensorflow.keras.mixed_precision import experimental as mixed_precision
+from tensorflow.keras import mixed_precision
 from tensorflow.keras.models import load_model
-from tensorflow.keras.mixed_precision import experimental as mixed_precision
 
-# from xrasterlib.dl.processing import normalize
-from core.utils import _2d_spline
-from core.utils import predict_windowing, predict_sliding
-# from core import indices
+# core library imports
+from core.utils import _2d_spline, arr_to_tif
+from core import predict_all, indices
 
 # define configuration object
-from config import ConfigTemplate
-config = ConfigTemplate.Configuration()
+from config import Config
+config = Config.Configuration()
 
 __author__ = "Jordan A Caraballo-Vega, Science Data Processing Branch"
 __email__ = "jordan.a.caraballo-vega@nasa.gov"
@@ -33,111 +34,34 @@ np.random.seed(config.SEED)
 tf.random.set_seed(config.SEED)
 cp.random.seed(config.SEED)
 
-# For more information about autotune:
-# https://www.tensorflow.org/guide/data_performance#prefetching
-AUTOTUNE = tf.data.experimental.AUTOTUNE
 print(f"Tensorflow ver. {tf.__version__}")
+
+# verify GPU devices are available and ready
+os.environ['CUDA_VISIBLE_DEVICES'] = config.CUDA
+devices = tf.config.list_physical_devices('GPU')
+assert len(devices) != 0, "No GPU devices found."
 
 # ------------------------------------------------------------------
 # System Configurations
 # ------------------------------------------------------------------
-# if config.MIRROR_STRATEGY:
-#    strategy = tf.distribute.MirroredStrategy()
-
 if config.MIXED_PRECISION:
-    policy = tf.keras.mixed_precision.experimental.Policy('mixed_float16')
-    mixed_precision.set_policy(policy)
+    policy = mixed_precision.Policy('mixed_float16')
+    mixed_precision.set_global_policy(policy)
     print('Mixed precision enabled')
 
 if config.XLA_ACCELERATE:
     tf.config.optimizer.set_jit(True)
     print('Accelerated Linear Algebra enabled')
 
+# set memory growth to infinite to account for multiple devices
 physical_devices = tf.config.experimental.list_physical_devices('GPU')
 for pd in physical_devices:
     configTF = tf.config.experimental.set_memory_growth(pd, True)
 
 
 # ---------------------------------------------------------------------------
-# script train.py
-#
-# Train model using CNN. Data Source: NGA Vietnam dataset.
+# script predict.py
 # ---------------------------------------------------------------------------
-
-def npy_to_tif(raster_f='image.tif', segments='segment.npy',
-               outtif='segment.tif', ndval=-9999
-               ):
-    """
-    Args:
-        raster_f:
-        segments:
-        outtif:
-    Returns:
-    """
-    # get geospatial profile, will apply for output file
-    with rio.open(raster_f) as src:
-        meta = src.profile
-        nodatavals = src.read_masks(1).astype('int16')
-    print(meta)
-
-    # load numpy array if file is given
-    if type(segments) == str:
-        segments = np.load(segments)
-    segments = segments.astype('int16')
-    print(segments.dtype)  # check datatype
-
-    nodatavals[nodatavals == 0] = ndval
-    segments[nodatavals == ndval] = nodatavals[nodatavals == ndval]
-
-    out_meta = meta  # modify profile based on numpy array
-    out_meta['count'] = 1  # output is single band
-    out_meta['dtype'] = 'int16'  # data type is float64
-
-    # write to a raster
-    with rio.open(outtif, 'w', **out_meta) as dst:
-        dst.write(segments, 1)
-
-
-def predict_all(x_data, model, config, spline):
-
-    for i in range(8):
-        if i == 0:  # reverse first dimension
-            x_seg = predict_windowing(x_data[::-1, :, :], model, config, spline=spline).transpose([2, 0, 1])
-            gc.collect()
-        elif i == 1:  # reverse second dimension
-            temp = predict_windowing(x_data[:, ::-1, :], model, config, spline=spline).transpose([2, 0, 1])
-            x_seg = temp[:, ::-1, :] + x_seg
-            gc.collect()
-        elif i == 2:  # transpose(interchange) first and second dimensions
-            temp = predict_windowing(x_data.transpose([1, 0, 2]), model, config, spline=spline).transpose([2, 0, 1])
-            x_seg = temp.transpose(0, 2, 1) + x_seg
-            gc.collect()
-        elif i == 3:
-            temp = predict_windowing(np.rot90(x_data, 1), model, config, spline=spline)
-            x_seg = np.rot90(temp, -1).transpose([2, 0, 1]) + x_seg
-            gc.collect()
-        elif i == 4:
-            temp = predict_windowing(np.rot90(x_data, 2), model, config, spline=spline)
-            x_seg = np.rot90(temp, -2).transpose([2, 0, 1]) + x_seg
-            gc.collect()
-        elif i == 5:
-            temp = predict_windowing(np.rot90(x_data, 3), model, config, spline=spline)
-            x_seg = np.rot90(temp, -3).transpose(2, 0, 1) + x_seg
-            gc.collect()
-        elif i == 6:
-            temp = predict_windowing(x_data, model, config, spline=spline).transpose([2, 0, 1])
-            x_seg = temp + x_seg
-            gc.collect()
-        elif i == 7:
-            temp = predict_sliding(x_data, model, config, spline=spline).transpose([2, 0, 1])
-            x_seg = temp + x_seg
-            gc.collect()
-
-    del x_data, temp  # delete arrays
-    x_seg /= 8.0
-    return x_seg.argmax(axis=0)
-
-
 def predict(x_data, model, config, spline, normalize=True, standardize=True):
 
     # open rasters and get both data and coordinates
@@ -162,7 +86,7 @@ def predict(x_data, model, config, spline, normalize=True, standardize=True):
                 x1 = rast_shape[0]  # assign boundary to x-window
             if y1 > rast_shape[1]:  # if selected y exceeds boundary
                 y1 = rast_shape[1]  # assign boundary to y-window
-            if x1 - x0 < config.TILE_SIZE:  # if selected x is smaller than tsize
+            if x1 - x0 < config.TILE_SIZE:  # if x is smaller than tsize
                 x0 = x1 - config.TILE_SIZE  # assign boundary to -tsize
             if y1 - y0 < config.TILE_SIZE:  # if selected y is small than tsize
                 y0 = y1 - config.TILE_SIZE  # assign boundary to -tsize
@@ -175,26 +99,34 @@ def predict(x_data, model, config, spline, normalize=True, standardize=True):
 
             # adding indices
             # window = cp.transpose(window, (2, 0, 1))
-            # fdi = indices.fdi(window, config.PRED_BANDS_INPUT, factor=config.INDICES_FACTOR, vtype='int16')
-            # si = indices.si(window, config.PRED_BANDS_INPUT, factor=config.INDICES_FACTOR, vtype='int16')
-            # ndwi = indices.ndwi(window, config.PRED_BANDS_INPUT, factor=config.INDICES_FACTOR, vtype='int16')
+            # fdi = indices.fdi(
+            #    window, config.PRED_BANDS_INPUT,
+            #    factor=config.INDICES_FACTOR, vtype='int16'
+            # )
+            # si = indices.si(
+            #    window, config.PRED_BANDS_INPUT,
+            #    factor=config.INDICES_FACTOR, vtype='int16'
+            # )
+            # ndwi = indices.ndwi(
+            #    window, config.PRED_BANDS_INPUT,
+            #    factor=config.INDICES_FACTOR, vtype='int16'
+            # )
             # print(fdi.shape, si.shape, ndwi.shape, window.shape)
 
             # concatenate all indices
             # window = cp.concatenate((window, fdi, si, ndwi), axis=0)
             # window = cp.transpose(window, (1, 2, 0))
 
-            if normalize is True:
+            if config.NORMALIZE:
                 window = window / config.normalization_factor
 
             window = cp.asnumpy(window)
             print("Window shape", window.shape)
 
-            print(x0, x1, y0, y1, window.shape)
-
             # perform sliding window prediction
             prediction[x0:x1, y0:y1] = \
                 predict_all(window, model, config, spline=spline)
+
     return prediction
 
 
@@ -246,13 +178,16 @@ def main():
             # Getting predicted labels
             # --------------------------------------------------------------------------------
             os.system('mkdir -p {}'.format(config.PRED_SAVE_DIR))
-            prediction = predict(x_data, model, config, spline, normalize=config.NORMALIZE, standardize=config.STANDARDIZE)
+            prediction = predict(
+                x_data, model, config, spline, normalize=config.NORMALIZE,
+                standardize=config.STANDARDIZE
+            )
             prediction = prediction.astype(np.int8)  # type to int16
 
             # --------------------------------------------------------------------------------
             # Generating visualization from prediction
             # --------------------------------------------------------------------------------
-            npy_to_tif(raster_f=fname, segments=prediction, outtif=save_image)
+            arr_to_tif(raster_f=fname, segments=prediction, outtif=save_image)
             del prediction
 
         # This is the case where the prediction was already saved

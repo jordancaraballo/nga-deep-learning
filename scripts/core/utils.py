@@ -1,15 +1,16 @@
 # --------------------------------------------------------------------------
 # Core functions to train on NGA data.
 # --------------------------------------------------------------------------
+import gc                # clean garbage collection
 import glob              # get global files from directory
 import random            # for random integers
 from tqdm import tqdm    # for progress bar
 import numpy as np       # for arrays modifications
 import cupy as cp        # for arrays modifications
 import tensorflow as tf  # deep learning framework
-import logging           # for buil-in logging
 import scipy.signal      # for postprocessing
 import math              # for math calculations
+import rasterio as rio   # read rasters
 
 # Has a bug and will be included when bug is fixed.
 # from cuml.dask.preprocessing import OneHotEncoder, LabelBinarizer
@@ -153,17 +154,16 @@ def get_tensorslices(data_dir='', img_id='x', label_id='y'):
     # read all data files from disk
     for f in glob.glob(f'{data_dir}/*'):
         with np.load(f) as data:
-
-            if images.size:
+            # vstack image batches into memory
+            if images.size:  # if images has elements, vstack new batch
                 images = np.vstack([images, data[img_id]])
-            else:
+            else:  # if images empty, images equals new batch
                 images = data[img_id]
-
-            if labels.size:
+            # vstack label batches into memory
+            if labels.size:  # if labels has elements, vstack new batch
                 labels = np.vstack([labels, data[label_id]])
-            else:
+            else:  # if labels empty, images equals new batch
                 labels = data[label_id]
-
     return images, labels
 
 
@@ -203,22 +203,25 @@ def data_augment(image, label):
 
 
 def get_training_dataset(dataset, config, do_aug=False, drop_remainder=False):
+    """
+    Return training dataset to feed tf.fit.
+    Args:
+        dataset (tf.dataset): tensorflow dataset
+        config (Config): Config object with parameters
+        do_aug (bool): perform augmentation on the fly?
+        drop_remainder (bool): drop remaineder when value does not match batch
+    Return:
+        tf dataset for training
+    ----------
+    Example
+    ----------
+        get_tensorslices(data_dir='images', img_id='x', label_id='y')
+    """
     dataset = dataset.map(data_augment, num_parallel_calls=config.AUTOTUNE)
     dataset = dataset.repeat()
     dataset = dataset.shuffle(2048)
     dataset = dataset.batch(config.BATCH_SIZE, drop_remainder=drop_remainder)
     # prefetch next batch while training (autotune prefetch buffer size)
-    dataset = dataset.prefetch(config.AUTOTUNE)
-    return dataset
-
-
-def get_validation_dataset(dataset, config):
-    # dataset.batch(BATCH_SIZE).cache().repeat() #take(BATCH_SIZE).cache().repeat()
-    # dataset = dataset.repeat()
-    # dataset = dataset.batch(BATCH_SIZE)
-    # dataset = dataset.cache()
-    dataset.batch(config.BATCH_SIZE)
-    dataset = dataset.cache().repeat()
     dataset = dataset.prefetch(config.AUTOTUNE)
     return dataset
 
@@ -230,38 +233,49 @@ def gen_callbacks(config, metadata):
         config (Config): object with configurations
         metadata (dict): directory with callback metadata values
     Return:
-        augmented image and label
+        list of callback functions
     ----------
     Example
     ----------
         gen_callbacks(config, metadata)
     """
-    # Generating tensorboard callbacks
-    tensor = TensorBoard(
-        log_dir=config.MODEL_SAVEDIR, write_graph=True,
-        histogram_freq=metadata['history_freq']
-    )
+    callback_list = list()
 
-    # initialize model csv logger callback
-    csv_outfile = config.MODEL_OUTPUT_NAME[:-3] + '_' + \
-        datetime.now().strftime("%Y%m%d-%H%M%S")+'.csv'
-    csvlog = CSVLogger(csv_outfile, append=True, separator=';')
+    if 'TensorBoard' in config.CALLBACKS:
+        # Generating tensorboard callbacks
+        tensor = TensorBoard(
+            log_dir=config.MODEL_SAVEDIR, write_graph=True,
+            histogram_freq=metadata['history_freq']
+        )
+        callback_list.append(tensor)
 
-    # initialize model early stopping callback
-    early_stop = EarlyStopping(
-        patience=metadata['patience_earlystop'],
-        monitor=metadata['monitor_earlystop']
-    )
+    if 'CSVLogger' in config.CALLBACKS:
+        # initialize model csv logger callback
+        csv_outfile = config.MODEL_OUTPUT_NAME[:-3] + '_' + \
+            datetime.now().strftime("%Y%m%d-%H%M%S")+'.csv'
+        csvlog = CSVLogger(csv_outfile, append=True, separator=';')
+        callback_list.append(csvlog)
 
-    # initialize model checkpoint callback
-    checkpoint = ModelCheckpoint(
-        filepath=config.MODEL_OUTPUT_NAME[:-3]+'_{epoch:02d}.h5',
-        monitor=metadata['monitor_checkpoint'],
-        save_best_only=metadata['save_best_only'],
-        save_freq=metadata['save_freq'],
-        verbose=1
-    )
-    return [csvlog, early_stop, checkpoint, tensor]
+    if 'EarlyStopping' in config.CALLBACKS:
+        # initialize model early stopping callback
+        early_stop = EarlyStopping(
+            patience=metadata['patience_earlystop'],
+            monitor=metadata['monitor_earlystop']
+        )
+        callback_list.append(early_stop)
+
+    if 'ModelCheckpoint' in config.CALLBACKS:
+        # initialize model checkpoint callback
+        checkpoint = ModelCheckpoint(
+            filepath=config.MODEL_OUTPUT_NAME[:-3]+'_{epoch:02d}.h5',
+            monitor=metadata['monitor_checkpoint'],
+            save_best_only=metadata['save_best_only'],
+            save_freq=metadata['save_freq'],
+            verbose=1
+        )
+        callback_list.append(checkpoint)
+
+    return callback_list
 
 
 # --------------------------------------------------------------------------
@@ -271,18 +285,40 @@ def gen_callbacks(config, metadata):
 def pad_image(img, target_size):
     """
     Pad an image up to the target size.
+    Args:
+        img (numpy.arry): image array
+        target_size (int): image target size
+    Return:
+        padded image array
+    ----------
+    Example
+    ----------
+        pad_image(img, target_size=256)
     """
     rows_missing = target_size - img.shape[0]
     cols_missing = target_size - img.shape[1]
     padded_img = np.pad(
         img, ((0, rows_missing), (0, cols_missing), (0, 0)), 'constant'
-        )
+    )
     return padded_img
 
 
 def predict_windowing(x, model, config, spline):
-
-    print("entrando windowing ", x.shape)
+    """
+    Predict scene using windowing mechanisms.
+    Args:
+        x (numpy.array): image array
+        model (tf h5): image target size
+        config (Config):
+        spline (numpy.array):
+    Return:
+        prediction scene array probabilities
+    ----------
+    Example
+    ----------
+        predict_windowing(x, model, config, spline)
+    """
+    print("Entering windowing prediction", x.shape)
 
     img_height = x.shape[0]
     img_width = x.shape[1]
@@ -313,19 +349,11 @@ def predict_windowing(x, model, config, spline):
             patches_list.append(ext_x[x0:x1, y0:y1, :])
 
     patches_array = np.asarray(patches_list)
-    # print("array the pathcews ", patches_array.shape)
 
     # standardize
     if config.STANDARDIZE:
         patches_array = batch_normalize(patches_array, axis=(0, 1), c=1e-8)
 
-    # if config.STANDARDIZE:
-    #    for i in range(config.N_CHANNELS):
-    #        patches_array[:, :, :, i] = \
-    #            (patches_array[:, :, :, i] - config.channel_mean[i]) / \
-    #            config.channel_std[i]
-
-    print("array the patches despues de norm", patches_array.shape)
     # predictions:
     patches_predict = \
         model.predict(patches_array, batch_size=config.PRED_BSIZE)
@@ -335,47 +363,60 @@ def predict_windowing(x, model, config, spline):
         dtype=np.float32
     )
 
-    logging.info("prediction shape: ", prediction.shape)
+    # ensemble of patches probabilities
     for k in range(patches_predict.shape[0]):
         i = k // npatches_horizontal
         j = k % npatches_horizontal
         x0, x1 = i * config.TILE_SIZE, (i + 1) * config.TILE_SIZE
         y0, y1 = j * config.TILE_SIZE, (j + 1) * config.TILE_SIZE
         prediction[x0:x1, y0:y1, :] = patches_predict[k, :, :, :] * spline
+
     return prediction[:img_height, :img_width, :]
 
 
-def predict_sliding(image, model, config, spline):
+def predict_sliding(x, model, config, spline):
     """
-    Predict on tiles of exactly the network input shape.
-    This way nothing gets squeezed.
+    Predict scene using sliding windows.
+    Args:
+        x (numpy.array): image array
+        model (tf h5): image target size
+        config (Config):
+        spline (numpy.array):
+    Return:
+        prediction scene array probabilities
+    ----------
+    Example
+    ----------
+        predict_windowing(x, model, config, spline)
     """
     stride = math.ceil(config.TILE_SIZE * (1 - config.PRED_OVERLAP))
-    tile_rows = max(
-        int(math.ceil((image.shape[0] - config.TILE_SIZE) / stride) + 1), 1
-        )  # strided convolution formula
-    tile_cols = max(
-        int(math.ceil((image.shape[1] - config.TILE_SIZE) / stride) + 1), 1
-        )
-    logging.info("Need %i x %i prediction tiles @ stride %i px" %
-                 (tile_cols, tile_rows, stride)
-                 )
 
-    full_probs = np.zeros((image.shape[0], image.shape[1], config.N_CLASSES))
+    tile_rows = max(
+        int(math.ceil((x.shape[0] - config.TILE_SIZE) / stride) + 1), 1
+    )  # strided convolution formula
+
+    tile_cols = max(
+        int(math.ceil((x.shape[1] - config.TILE_SIZE) / stride) + 1), 1
+    )  # strided convolution formula
+
+    print(f'{tile_cols} x {tile_rows} prediction tiles @ stride {stride} px')
+
+    full_probs = np.zeros((x.shape[0], x.shape[1], config.N_CLASSES))
+
     count_predictions = \
-        np.zeros((image.shape[0], image.shape[1], config.N_CLASSES))
+        np.zeros((x.shape[0], x.shape[1], config.N_CLASSES))
 
     tile_counter = 0
     for row in range(tile_rows):
         for col in range(tile_cols):
             x1 = int(col * stride)
             y1 = int(row * stride)
-            x2 = min(x1 + config.TILE_SIZE, image.shape[1])
-            y2 = min(y1 + config.TILE_SIZE, image.shape[0])
+            x2 = min(x1 + config.TILE_SIZE, x.shape[1])
+            y2 = min(y1 + config.TILE_SIZE, x.shape[0])
             x1 = max(int(x2 - config.TILE_SIZE), 0)
             y1 = max(int(y2 - config.TILE_SIZE), 0)
 
-            img = image[y1:y2, x1:x2]
+            img = x[y1:y2, x1:x2]
             padded_img = pad_image(img, config.TILE_SIZE)
             tile_counter += 1
 
@@ -384,11 +425,6 @@ def predict_sliding(image, model, config, spline):
             # standardize
             if config.STANDARDIZE:
                 padded_img = batch_normalize(padded_img, axis=(0, 1), c=1e-8)
-
-            #    for i in range(config.N_CHANNELS):
-            #        padded_img[:, :, :, i] = \
-            #            (padded_img[:, :, :, i] - config.channel_mean[i]) / \
-            #            config.channel_std[i]
 
             imgn = padded_img
             imgn = imgn.astype('float32')
@@ -403,12 +439,82 @@ def predict_sliding(image, model, config, spline):
     return full_probs
 
 
+def predict_all(x, model, config, spline):
+    """
+    Predict full scene using average predictions.
+    Args:
+        x (numpy.array): image array
+        model (tf h5): image target size
+        config (Config):
+        spline (numpy.array):
+    Return:
+        prediction scene array average probabilities
+    ----------
+    Example
+    ----------
+        predict_all(x, model, config, spline)
+    """
+    for i in range(8):
+        if i == 0:  # reverse first dimension
+            x_seg = predict_windowing(
+                x[::-1, :, :], model, config, spline=spline
+            ).transpose([2, 0, 1])
+        elif i == 1:  # reverse second dimension
+            temp = predict_windowing(
+                x[:, ::-1, :], model, config, spline=spline
+            ).transpose([2, 0, 1])
+            x_seg = temp[:, ::-1, :] + x_seg
+        elif i == 2:  # transpose(interchange) first and second dimensions
+            temp = predict_windowing(
+                x.transpose([1, 0, 2]), model, config, spline=spline
+            ).transpose([2, 0, 1])
+            x_seg = temp.transpose(0, 2, 1) + x_seg
+            gc.collect()
+        elif i == 3:
+            temp = predict_windowing(
+                np.rot90(x, 1), model, config, spline=spline
+            )
+            x_seg = np.rot90(temp, -1).transpose([2, 0, 1]) + x_seg
+            gc.collect()
+        elif i == 4:
+            temp = predict_windowing(
+                np.rot90(x, 2), model, config, spline=spline
+            )
+            x_seg = np.rot90(temp, -2).transpose([2, 0, 1]) + x_seg
+        elif i == 5:
+            temp = predict_windowing(
+                np.rot90(x, 3), model, config, spline=spline
+            )
+            x_seg = np.rot90(temp, -3).transpose(2, 0, 1) + x_seg
+        elif i == 6:
+            temp = predict_windowing(
+                x, model, config, spline=spline
+            ).transpose([2, 0, 1])
+            x_seg = temp + x_seg
+        elif i == 7:
+            temp = predict_sliding(
+                x, model, config, spline=spline
+            ).transpose([2, 0, 1])
+            x_seg = temp + x_seg
+            gc.collect()
+
+    del x, temp  # delete arrays
+    x_seg /= 8.0
+    return x_seg.argmax(axis=0)
+
+
 def _2d_spline(window_size=128, power=2) -> np.array:
     """
     Window method for boundaries/edge artifacts smoothing.
-    :param window_size: size of window/tile to smooth
-    :param power: spline polinomial power to use
-    :return: smoothing distribution numpy array
+    Args:
+        window_size (int): size of window/tile to smooth
+        power (int): spline polinomial power to use
+    Return:
+        smoothing distribution numpy array
+    ----------
+    Example
+    ----------
+        _2d_spline(window_size=128, power=2)
     """
     intersection = int(window_size/4)
     tria = scipy.signal.triang(window_size)
@@ -424,3 +530,42 @@ def _2d_spline(window_size=128, power=2) -> np.array:
     wind = np.expand_dims(np.expand_dims(wind, 1), 2)
     wind = wind * wind.transpose(1, 0, 2)
     return wind
+
+
+def arr_to_tif(raster_f, segments, out_tif='segment.tif', ndval=-9999):
+    """
+    Save array into GeoTIF file.
+    Args:
+        raster_f (str): input data filename
+        segments (numpy.array): array with values
+        out_tif (str): output filename
+        ndval (int): no data value
+    Return:
+        save GeoTif to local disk
+    ----------
+    Example
+    ----------
+        arr_to_tif('inp.tif', segments, 'out.tif', ndval=-9999)
+    """
+    # get geospatial profile, will apply for output file
+    with rio.open(raster_f) as src:
+        meta = src.profile
+        nodatavals = src.read_masks(1).astype('int16')
+    print(meta)
+
+    # load numpy array if file is given
+    if type(segments) == str:
+        segments = np.load(segments)
+    segments = segments.astype('int16')
+    print(segments.dtype)  # check datatype
+
+    nodatavals[nodatavals == 0] = ndval
+    segments[nodatavals == ndval] = nodatavals[nodatavals == ndval]
+
+    out_meta = meta  # modify profile based on numpy array
+    out_meta['count'] = 1  # output is single band
+    out_meta['dtype'] = 'int16'  # data type is float64
+
+    # write to a raster
+    with rio.open(out_tif, 'w', **out_meta) as dst:
+        dst.write(segments, 1)
