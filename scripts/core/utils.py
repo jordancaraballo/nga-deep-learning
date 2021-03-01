@@ -255,10 +255,11 @@ def gen_callbacks(config, metadata):
 
     # initialize model checkpoint callback
     checkpoint = ModelCheckpoint(
-        config.MODEL_OUTPUT_NAME[:-3]+'_{epoch:02d}.h5',
+        filepath=config.MODEL_OUTPUT_NAME[:-3]+'_{epoch:02d}.h5',
+        monitor=metadata['monitor_checkpoint'],
         save_best_only=metadata['save_best_only'],
-        save_freq=metadata['period_checkpoint'] * config.BATCH_SIZE,
-        verbose=2
+        save_freq=metadata['save_freq'],
+        verbose=1
     )
     return [csvlog, early_stop, checkpoint, tensor]
 

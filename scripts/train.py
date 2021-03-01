@@ -104,7 +104,7 @@ def main():
 
     # generate validation dataset
     val_dataset = tf.data.Dataset.from_tensor_slices((val_images, val_labels))
-    val_dataset = val_dataset.batch(config.BATCH_SIZE)
+    val_dataset = val_dataset.batch(config.VAL_BATCH_SIZE)
 
     # Create model output directory
     os.system(f'mkdir -p {config.MODEL_SAVEDIR}')
