@@ -58,11 +58,6 @@ if config.XLA_ACCELERATE:
     tf.config.optimizer.set_jit(True)
     print('Accelerated Linear Algebra enabled')
 
-# data lives in memory, use in memory multi-worker options
-options = tf.data.Options()
-options.experimental_distribute.auto_shard_policy = \
-    tf.data.experimental.AutoShardPolicy.DATA
-
 
 # ---------------------------------------------------------------------------
 # script train.py
@@ -136,6 +131,13 @@ def main():
             metrics=config.MODEL_METADATA['metrics']
         )
         model.summary()
+
+    # Disable AutoShard, data lives in memory, use in memory options
+    options = tf.data.Options()
+    options.experimental_distribute.auto_shard_policy = \
+        tf.data.experimental.AutoShardPolicy.OFF
+    train_dataset = train_dataset.with_options(options)
+    val_dataset = val_dataset.with_options(options)
 
     # Train the model and save to disk
     model.fit(
