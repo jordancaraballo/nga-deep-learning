@@ -17,8 +17,8 @@ from tensorflow.keras.models import load_model
 
 # core library imports
 from core.utils import _2d_spline, arr_to_tif
-from core import predict_all
-from core import indices
+from core.utils import predict_all
+from core.utils import indices
 
 # define configuration object
 from config import Config
