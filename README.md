@@ -115,7 +115,7 @@ Where:
 In this section of the pipeline we take raw raster and masks, and we generate training and validation
 datasets to work with. The following script will save NPZ files into local storage with the train and mask
 mappings taken from the data.csv file. Parameters are taken from the Configuration File. Expect to find two
-new directories on the ROOT DIR specified on the Configuration file with an NPZ file per raster. These NPZ
+new directories on the ROOT_DIR specified on the Configuration file with an NPZ file per raster. These NPZ
 files contain the dataset mappings with 'x' for data, and 'y' for the label.
 
 if specified, data will be stanrdardized using local standardization.
