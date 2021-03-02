@@ -67,7 +67,9 @@ singularity pull docker://docker.io/nasanccs/nga-deeplearning:latest
 #### Executing Container
 
 For Singularity containers to have access to other paths within the HPC environment, we need to bind
-directories to particular locations in the container.
+directories to particular locations in the container. The container provided by this project has a built-in
+conda environment that includes all software dependencies to run this project. To shell into the container
+and activate this environment:
 
 ```bash
 singularity shell --nv -B /att/nobackup/$user:/att/nobackup/$user,/att/gpfsfs/atrepo01/ILAB:/att/gpfsfs/atrepo01/ILAB nga-deeplearning_latest.sif
@@ -88,7 +90,8 @@ should look similar to the following example:
 /att/labels/labels01.tif, /att/labels/labels02.tif, /att/labels/labels03.tif
 ```
 
-The information regarding the data will be stored in a CSV file located under scripts/config/data.csv, with the following format:
+Example input shape are (5000,5000,6) for data rasters, and (5000,5000) for mask files. The information regarding the data will be stored
+in a CSV file located under scripts/config/data.csv, with the following format:
 
 ```bash
 data,label,ntiles_train,ntiles_val,ymin,ymax,xmin,xmax
@@ -127,6 +130,11 @@ In this section of the pipeline we proceed to train the model. Please refer to t
 details on parameters required for training. The main script will: read the data files, map them into TensorFlow
 datasets, initialize the UNet model, and proceed with training. A model (.h5 file) will be saved for each epoch
 that improved model performance.
+
+You might notice that the first epoch of the model takes a long time to train. This is expected since the model
+is being optimized during the first epoch. Distributed training across multiple GPUs is enabled, together with
+mixed precission for additional performance enhancements. Upcoming modifications will include A100 performance
+enhancements and Horovod for multi-node training.
 
 ```bash
 python train.py
