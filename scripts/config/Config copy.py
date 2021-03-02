@@ -84,14 +84,6 @@ class Configuration:
         # self.PREP_ROOT_OUTDIR: root directory that leads to data subdirs
         self.PREP_ROOT_OUTDIR = '/att/projects/Vietnam/dataset'
 
-
-        self.PREP_DATA_INPDIR = '/att/gpfsfs/atrepo01/ILAB/projects/Vietnam/Sarah/data'
-        self.PREP_LABELS_INPDIR = '/att/gpfsfs/atrepo01/ILAB/projects/Vietnam/Mary/cloud_labels'
-        self.PREP_ROOT_OUTDIR = '/att/gpfsfs/atrepo01/ILAB/projects/Vietnam/Jordan/test_container'
-
-
-
-
         # self.PREP_TRAIN_OUTDIR: output directory to store training data
         self.PREP_TRAIN_OUTDIR = self.PREP_ROOT_OUTDIR + '/train'
 
@@ -167,12 +159,6 @@ class Configuration:
         # self.MODEL_SAVEDIR: directory to save trained models
         self.MODEL_SAVEDIR = f'/att/projects/Vietnam/unet/{self.MODEL_NAME}'
 
-
-
-        self.MODEL_SAVEDIR = f'{self.PREP_ROOT_OUTDIR}/{self.MODEL_NAME}'
-
-
-
         # self.MODEL_OUTPUT_NAME: output name for model to be saved
         self.MODEL_OUTPUT_NAME = f'{self.MODEL_SAVEDIR}/{self.MODEL_NAME}.h5'
 
@@ -207,11 +193,6 @@ class Configuration:
 
         # self.PRED_FILENAMES: regex to flag all files to predict
         self.PRED_FILENAMES = '/att/projects/Vietnam/images/*.tif'
-
-
-        self.PRED_FILENAMES = '/att/nobackup/mwooten3/Vietnam_LCLUC/TOA/M1BS/*.tif'
-
-        
         self.PRED_FILENAMES = glob.glob(self.PRED_FILENAMES)
 
         # self.PRED_OVERLAP: overlap between tiles to predict
