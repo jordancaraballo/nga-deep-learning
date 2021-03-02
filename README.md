@@ -71,7 +71,6 @@ directories to particular locations in the container.
 
 ```bash
 singularity shell --nv -B /att/nobackup/$user:/att/nobackup/$user,/att/gpfsfs/atrepo01/ILAB:/att/gpfsfs/atrepo01/ILAB nga-deeplearning_latest.sif
-shell --nv -B /att/nobackup/jacaraba:/att/nobackup/jacaraba,/att/gpfsfs/atrepo01/ILAB:/att/gpfsfs/atrepo01/ILAB nga-deeplearning_latest.sif
 source activate rapids
 ```
 
@@ -110,9 +109,39 @@ Where:
 
 ### Preprocess
 
+In this section of the pipeline we take raw raster and masks, and we generate training and validation
+datasets to work with. The following script will save NPZ files into local storage with the train and mask
+mappings taken from the data.csv file. Parameters are taken from the Configuration File. Expect to find two
+new directories on the ROOT DIR specified on the Configuration file with an NPZ file per raster. These NPZ
+files contain the dataset mappings with 'x' for data, and 'y' for the label.
+
+if specified, data will be stanrdardized using local standardization.
+
+```bash
+python preprocessing.py
+```
+
 ### Train
 
+In this section of the pipeline we proceed to train the model. Please refer to the Configuration file for more
+details on parameters required for training. The main script will: read the data files, map them into TensorFlow
+datasets, initialize the UNet model, and proceed with training. A model (.h5 file) will be saved for each epoch
+that improved model performance.
+
+```bash
+python train.py
+```
+
 ### Predict
+
+In this section we proceed to train the desired data taking one of the saved models, and using it for predictions.
+Please refer to the Configuration file for more details on parameters required for predicting. Ideally, all images to
+predict will be stored in the same directory ending on .tif extensions. The script will go through every file, predict
+it and output both the predicted GeoTIF and the probabilities arrays.
+
+```bash
+python predict.py
+```
 
 ## Authors
 
