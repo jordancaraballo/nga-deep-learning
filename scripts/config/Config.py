@@ -209,7 +209,7 @@ class Configuration:
         self.PRED_FILENAMES = '/att/projects/Vietnam/images/*.tif'
 
 
-        self.PRED_FILENAMES = '/att/nobackup/mwooten3/Vietnam_LCLUC/TOA/M1BS/*.tif'
+        self.PRED_FILENAMES = '/att/gpfsfs/atrepo01/ILAB/projects/Vietnam/Jordan/data_keelin/*.tif'
 
         
         self.PRED_FILENAMES = glob.glob(self.PRED_FILENAMES)
