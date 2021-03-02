@@ -47,7 +47,7 @@ This repository includes a Docker file to build the container. The base image is
 NGC container repository with the RAPIDS environment.
 
 ```bash
-git clone https://gitlab.nccs.nasa.gov/jacaraba/nga-deep-learning.git
+git clone https://github.com/jordancaraballo/nga-deep-learning.git
 cd nga-deep-learning/packages/
 docker build --tag nga-deeplearning:latest .
 docker login
