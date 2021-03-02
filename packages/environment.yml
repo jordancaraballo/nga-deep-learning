@@ -1,5 +1,5 @@
 # definition file to build xrasterlib conda environment
-name: nga-deep-learning
+name: rapids
 
 channels:
   - conda-forge
