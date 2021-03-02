@@ -1,5 +1,5 @@
 # definition file to build xrasterlib conda environment
-name: nga-deep-learning
+name: rapids
 
 channels:
   - conda-forge
@@ -13,8 +13,6 @@ dependencies:
   - rapids-blazing=0.18
   - python=3.7
   - cudatoolkit=11.0
-  - webcolors
-  - Pillow
   - pip
   - pip:
     - tensorflow==2.4

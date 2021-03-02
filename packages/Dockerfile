@@ -18,10 +18,10 @@ ENV RAPIDS_DIR=/rapids
 
 COPY . /opt/apt
 WORKDIR /opt/apt
-RUN conda env update --name rapids --file environment.yml
+#RUN conda env update --name rapids --file environment.yml
 
-#RUN source activate rapids && \
-#    pip install -r /opt/apt//requirements.txt
+RUN source activate rapids && \
+    pip install -r requirements.txt
 
 HEALTHCHECK NONE
 
