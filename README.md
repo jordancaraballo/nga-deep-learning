@@ -29,8 +29,8 @@ Installing conda environment.
 
 ``` bash
 module load anaconda
-git clone https://gitlab.nccs.nasa.gov/jacaraba/ai-cloud-shadow-masking-vhr.git
-cd ai-cloud-shadow-masking-vhr; conda env create -f requirements/environment.yml;
+git clone https://github.com/jordancaraballo/nga-deep-learning.git
+cd nga-deep-learning; conda env create -f requirements/environment.yml;
 ```
 
 Note: Using Tensorflow 2.2 at this time since NCCS GPU Cluster does not have CUDA 11.x available as of 12/16/2020.
