@@ -134,7 +134,7 @@ class Configuration:
         # self.BATCH_SIZE: batch size to feed the network
         # 128 bsize works well with 32GB RAM GPU
         self.BATCH_SIZE = 128
-        self.VAL_BATCH_SIZE = 1024
+        self.VAL_BATCH_SIZE = 512
 
         # self.TRAIN_ROOT_INPDIR: root dir where train and val data resides
         self.TRAIN_ROOT_INPDIR = self.PREP_ROOT_OUTDIR
