@@ -157,7 +157,7 @@ class Configuration:
         self.MODEL_NAME = '100_unet_viet_cm_4chann_std_Adadelta_256_0.0001_128'
 
         # self.MODEL_SAVEDIR: directory to save trained models
-        self.MODEL_SAVEDIR = f'{self.TRAIN_ROOT_OUTDIR}/unet/{self.MODEL_NAME}'
+        self.MODEL_SAVEDIR = f'{self.TRAIN_ROOT_INPDIR}/unet/{self.MODEL_NAME}'
 
         # self.MODEL_OUTPUT_NAME: output name for model to be saved
         self.MODEL_OUTPUT_NAME = f'{self.MODEL_SAVEDIR}/{self.MODEL_NAME}.h5'
