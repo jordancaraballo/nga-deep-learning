@@ -22,7 +22,7 @@ class Configuration:
         self.SEED = 42
 
         # self.CUDA: define CUDA devices to use
-        self.CUDA = "0,1,2,3"
+        self.CUDA = "0,1"
 
         # self.FOLDS: define folds for batch iterations
         self.FOLDS = 3
@@ -91,7 +91,7 @@ class Configuration:
         self.PREP_VAL_OUTDIR = self.PREP_ROOT_OUTDIR + '/val'
 
         # self.NORMALIZE: bool value to apply normalization to the dataset
-        self.NORMALIZE = False
+        self.NORMALIZE = True
 
         # self.normalization_factor: float value to accomply normalization
         self.normalization_factor = 255.0  # 65535.0
