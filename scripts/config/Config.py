@@ -94,7 +94,7 @@ class Configuration:
         self.NORMALIZE = False
 
         # self.normalization_factor: float value to accomply normalization
-        self.normalization_factor = 65535.0
+        self.normalization_factor = 255.0  # 65535.0
 
         # self.STANDARDIZE: bool value to apply standardization to the dataset
         self.STANDARDIZE = True
