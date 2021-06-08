@@ -55,14 +55,14 @@ class Configuration:
 
         # self.INIT_BANDS: bands available in the original data
         self.INIT_BANDS = \
-            ['Blue', 'Green', 'Red', 'NIR1', 'HOM1', 'HOM2']
+            ['Blue', 'Green', 'Red']
 
         # self.N_CLASSES: number of classes that will be classified
         # An example of this: tree, shadow, cloud, background = 4 classes
-        self.N_CLASSES = 2
+        self.N_CLASSES = 5
 
         # self.TILE_SIZE: tile size to feed the model
-        self.TILE_SIZE = 256
+        self.TILE_SIZE = 128
 
         # ------------------------------------------------------------------
         # Preprocessing
@@ -72,17 +72,17 @@ class Configuration:
         self.PREP_DATA_FILE = 'config/data.csv'
 
         # self.PREP_DATA_INPDIR: directory where GeoTIF data rasters reside
-        self.PREP_DATA_INPDIR = '/att/projects/Vietnam/data'
+        self.PREP_DATA_INPDIR = '/gpfsm/ccds01/nobackup/temp/jacaraba/GMU/data'
 
         # self.PREP_LABELS_INPDIR: directory where GeoTIF label rasters reside
-        self.PREP_LABELS_INPDIR = '/att/projects/Vietnam/labels'
+        self.PREP_LABELS_INPDIR = '/gpfsm/ccds01/nobackup/temp/jacaraba/GMU/labels'
 
         # self.PREP_BANDS_OUTPUT: bands to output from data to train
         self.PREP_BANDS_OUTPUT = \
-            ['Blue', 'Green', 'Red', 'NIR1']
+            ['Blue', 'Green', 'Red']
 
         # self.PREP_ROOT_OUTDIR: root directory that leads to data subdirs
-        self.PREP_ROOT_OUTDIR = '/att/projects/Vietnam/dataset'
+        self.PREP_ROOT_OUTDIR = '/gpfsm/ccds01/nobackup/temp/jacaraba/GMU/output'
 
         # self.PREP_TRAIN_OUTDIR: output directory to store training data
         self.PREP_TRAIN_OUTDIR = self.PREP_ROOT_OUTDIR + '/train'
@@ -126,7 +126,7 @@ class Configuration:
         # self.BATCH_SIZE: batch size to feed the network
         # 128 bsize works well with 32GB RAM GPU
         self.BATCH_SIZE = 128
-        self.VAL_BATCH_SIZE = 1024
+        self.VAL_BATCH_SIZE = 128
 
         # self.TRAIN_ROOT_INPDIR: root dir where train and val data resides
         self.TRAIN_ROOT_INPDIR = self.PREP_ROOT_OUTDIR
@@ -157,7 +157,7 @@ class Configuration:
         self.MODEL_NAME = '100_unet_viet_cm_4chann_std_Adadelta_256_0.0001_128'
 
         # self.MODEL_SAVEDIR: directory to save trained models
-        self.MODEL_SAVEDIR = f'/att/projects/Vietnam/unet/{self.MODEL_NAME}'
+        self.MODEL_SAVEDIR = f'{self.TRAIN_ROOT_OUTDIR}/unet/{self.MODEL_NAME}'
 
         # self.MODEL_OUTPUT_NAME: output name for model to be saved
         self.MODEL_OUTPUT_NAME = f'{self.MODEL_SAVEDIR}/{self.MODEL_NAME}.h5'
