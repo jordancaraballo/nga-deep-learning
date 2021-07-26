@@ -72,17 +72,17 @@ class Configuration:
         self.PREP_DATA_FILE = 'config/data.csv'
 
         # self.PREP_DATA_INPDIR: directory where GeoTIF data rasters reside
-        self.PREP_DATA_INPDIR = '/gpfsm/ccds01/nobackup/temp/jacaraba/GMU/data'
+        self.PREP_DATA_INPDIR = '/att/nobackup/jacaraba/nga-deeplearning-data/data'
 
         # self.PREP_LABELS_INPDIR: directory where GeoTIF label rasters reside
-        self.PREP_LABELS_INPDIR = '/gpfsm/ccds01/nobackup/temp/jacaraba/GMU/labels'
+        self.PREP_LABELS_INPDIR = '/att/nobackup/jacaraba/nga-deeplearning-data/labels'
 
         # self.PREP_BANDS_OUTPUT: bands to output from data to train
         self.PREP_BANDS_OUTPUT = \
             ['Blue', 'Green', 'Red']
 
         # self.PREP_ROOT_OUTDIR: root directory that leads to data subdirs
-        self.PREP_ROOT_OUTDIR = '/gpfsm/ccds01/nobackup/temp/jacaraba/GMU/output'
+        self.PREP_ROOT_OUTDIR = '/att/nobackup/jacaraba/nga-deeplearning-data/output'
 
         # self.PREP_TRAIN_OUTDIR: output directory to store training data
         self.PREP_TRAIN_OUTDIR = self.PREP_ROOT_OUTDIR + '/train'
@@ -146,7 +146,7 @@ class Configuration:
             'momentum': 0.90,
             'gradient': 0.95,
             'loss': 'categorical_crossentropy',
-            'optimizer_name': 'Adadelta',
+            'optimizer_name': 'Adam',
             'metrics': ['accuracy'],
             'do_aug': True
         }
@@ -154,7 +154,7 @@ class Configuration:
         # Model description and output directory
 
         # self.MODEL_NAME: model name to train
-        self.MODEL_NAME = '100_unet_viet_cm_4chann_std_Adadelta_256_0.0001_128'
+        self.MODEL_NAME = '100_unet_mle5_128'
 
         # self.MODEL_SAVEDIR: directory to save trained models
         self.MODEL_SAVEDIR = f'{self.TRAIN_ROOT_INPDIR}/unet/{self.MODEL_NAME}'

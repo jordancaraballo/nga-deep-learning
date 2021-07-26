@@ -1,4 +1,5 @@
 data,label,ntiles_train,ntiles_val,ymin,ymax,xmin,xmax
-number16.tiff,number16.tiff,80,20,0,50,0,50
-number32.tiff,number32.tiff,80,20,0,50,0,50
-number34.tiff,number34.tiff,80,20,0,50,0,50
+va059_number52.TIF,va059_number52.TIF,3000,600,0,50,0,50
+va059_number67.TIF,va059_number67.TIF,3000,600,0,50,0,50
+ny065_number32.TIF,ny065_number32.TIF,3000,600,0,50,0,50
+ny065_number501.TIF,ny065_number501.TIF,3000,600,0,50,0,50
