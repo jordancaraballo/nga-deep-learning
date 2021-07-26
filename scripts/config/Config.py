@@ -146,7 +146,7 @@ class Configuration:
             'momentum': 0.90,
             'gradient': 0.95,
             'loss': 'categorical_crossentropy',
-            'optimizer_name': 'Adam',
+            'optimizer_name': 'Adadelta',
             'metrics': ['accuracy'],
             'do_aug': True
         }
