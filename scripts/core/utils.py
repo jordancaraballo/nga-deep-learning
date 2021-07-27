@@ -506,7 +506,7 @@ def predict_all(x, model, config, spline):
 def predict_sliding_probs(x, model, config):
 
     # initial size: original tile (512, 512) - ((self.config.tile_size, ) * 2)
-    stride = config.TILE_SIZE - config.OVERLAP
+    stride = config.TILE_SIZE - config.PRED_OVERLAP
     shift = int((config.TILE_SIZE - stride) / 2)
 
     print(f'Stride and shift: {stride}, {shift}')
