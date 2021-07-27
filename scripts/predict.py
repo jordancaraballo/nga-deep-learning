@@ -98,31 +98,9 @@ def predict(x_data, model, config, spline, normalize=True, standardize=True):
             window[window < 0] = 0  # remove lower bound values
             window[window > 10000] = 10000  # remove higher bound values
 
-            # adding indices
-            # window = cp.transpose(window, (2, 0, 1))
-            # fdi = indices.fdi(
-            #    window, config.PRED_BANDS_INPUT,
-            #    factor=config.INDICES_FACTOR, vtype='int16'
-            # )
-            # si = indices.si(
-            #    window, config.PRED_BANDS_INPUT,
-            #    factor=config.INDICES_FACTOR, vtype='int16'
-            # )
-            # ndwi = indices.ndwi(
-            #    window, config.PRED_BANDS_INPUT,
-            #    factor=config.INDICES_FACTOR, vtype='int16'
-            # )
-            # print(fdi.shape, si.shape, ndwi.shape, window.shape)
-
-            # concatenate all indices
-            # window = cp.concatenate((window, fdi, si, ndwi), axis=0)
-            # window = cp.transpose(window, (1, 2, 0))
-
             if config.NORMALIZE:
                 window = window / config.normalization_factor
-
             window = cp.asnumpy(window)
-            print("Window shape", window.shape)
 
             # perform sliding window prediction
             prediction[x0:x1, y0:y1] = \
@@ -132,9 +110,6 @@ def predict(x_data, model, config, spline, normalize=True, standardize=True):
 
 
 def main():
-
-    # Main function to collect configuration file and run the script
-    # print(f'GPU REPLICAS: {strategy.num_replicas_in_sync}')
 
     # Generate 2-dimensional spline to avoid boundary problems
     spline = _2d_spline(config.TILE_SIZE, power=2)
@@ -155,11 +130,9 @@ def main():
         # path + name to store prediction into
         save_image = \
             os.path.join(config.PRED_SAVE_DIR, fname[:-4].split('/')[-1] + '_pred.tif')
-            #config.PRED_SAVE_DIR + fname[:-4].split('/')[-1] + '_pred.tif'
 
         save_segment = \
             os.path.join(config.PRED_SEG_SAVE_DIR, fname[:-4].split('/')[-1] + '_prob.npy')
-            #config.PRED_SAVE_DIR + fname[:-4].split('/')[-1] + '_pred.tif'
         
         os.system('mkdir -p {}'.format(config.PRED_SAVE_DIR))
         os.system('mkdir -p {}'.format(config.PRED_SEG_SAVE_DIR))
@@ -187,13 +160,9 @@ def main():
             # Getting predicted labels
             # --------------------------------------------------------------------------------
 
-            # predict probabilities
+            # predict probabilities, save to local disk
             prediction = predict_sliding_probs(x_data, model, config)
-            print("predicted shape and tupe", prediction.shape, type(prediction))
-            
-            # generates the probabilities
-            if config.PROBABILITIES:
-                np.save(save_segment, prediction)
+            np.save(save_segment, prediction)
             
             # get final mask and save the output
             prediction = prediction.argmax(axis=-1)
