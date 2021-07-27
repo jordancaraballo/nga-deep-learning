@@ -160,6 +160,9 @@ def main():
         save_segment = \
             os.path.join(config.PRED_SEG_SAVE_DIR, fname[:-4].split('/')[-1] + '_prob.npy')
             #config.PRED_SAVE_DIR + fname[:-4].split('/')[-1] + '_pred.tif'
+        
+        os.system('mkdir -p {}'.format(config.PRED_SAVE_DIR))
+        os.system('mkdir -p {}'.format(config.PRED_SEG_SAVE_DIR))
 
         # --------------------------------------------------------------------------------
         # if prediction is not on directory, start predicting
@@ -183,7 +186,6 @@ def main():
             # --------------------------------------------------------------------------------
             # Getting predicted labels
             # --------------------------------------------------------------------------------
-            os.system('mkdir -p {}'.format(config.PRED_SAVE_DIR))
 
             if config.PROBABILITIES:
                 
