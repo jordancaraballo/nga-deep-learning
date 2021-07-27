@@ -17,7 +17,7 @@ from tensorflow.keras.models import load_model
 
 # core library imports
 from core.utils import _2d_spline, arr_to_tif
-from core.utils import predict_all
+from core.utils import predict_all, predict_sliding_probs
 from core import indices
 
 # define configuration object
@@ -179,16 +179,26 @@ def main():
             # Getting predicted labels
             # --------------------------------------------------------------------------------
             os.system('mkdir -p {}'.format(config.PRED_SAVE_DIR))
-            prediction = predict(
-                x_data, model, config, spline, normalize=config.NORMALIZE,
-                standardize=config.STANDARDIZE
-            )
-            prediction = prediction.astype(np.int8)  # type to int16
 
-            # --------------------------------------------------------------------------------
-            # Generating visualization from prediction
-            # --------------------------------------------------------------------------------
-            arr_to_tif(raster_f=fname, segments=prediction, out_tif=save_image)
+            if config.PROBABILITIES:
+                
+                prediction = predict_sliding_probs(x_data, model, config)
+                print("predicted shape and tupe", prediction.shape, type(prediction))
+                #np.save()
+
+            else:
+
+                prediction = predict(
+                    x_data, model, config, spline, normalize=config.NORMALIZE,
+                    standardize=config.STANDARDIZE
+                )
+                prediction = prediction.astype(np.int8)  # type to int16
+
+                # --------------------------------------------------------------------------------
+                # Generating visualization from prediction
+                # --------------------------------------------------------------------------------
+                arr_to_tif(raster_f=fname, segments=prediction, out_tif=save_image)
+            
             del prediction
 
         # This is the case where the prediction was already saved

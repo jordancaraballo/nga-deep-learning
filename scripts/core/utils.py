@@ -499,12 +499,97 @@ def predict_all(x, model, config, spline):
             gc.collect()
 
     del x, temp  # delete arrays
-    x_seg /= 8.0  # get average probabilities
+    x_seg /= 8.0
+    return x_seg.argmax(axis=0)
 
-    if config.PROBABILITIES:
-        return x_seg
+
+def predict_sliding_probs(x, model, config):
+
+    # initial size: original tile (512, 512) - ((self.config.tile_size, ) * 2)
+    stride = config.TILE_SIZE - config.OVERLAP
+    shift = int((config.TILE_SIZE - stride) / 2)
+
+    print(f'Stride and shift: {stride}, {shift}')
+
+    height, width, num_channels = x.shape
+
+    if height % stride == 0:
+        num_h_tiles = int(height / stride)
     else:
-        return x_seg.argmax(axis=0)
+        num_h_tiles = int(height / stride) + 1
+
+    if width % stride == 0:
+        num_w_tiles = int(width / stride)
+    else:
+        num_w_tiles = int(width / stride) + 1
+    
+    rounded_height = num_h_tiles * stride
+    rounded_width = num_w_tiles * stride
+
+    padded_height = rounded_height + 2 * shift
+    padded_width = rounded_width + 2 * shift
+
+    padded = np.zeros((padded_height, padded_width, num_channels))
+    padded[shift:shift + height, shift: shift + width, :] = x
+    print(f'Padded shape: {padded.shape}')
+
+    up = padded[shift:2 * shift, shift:-shift, :][:, ::-1]
+    padded[:shift, shift:-shift, :] = up
+    print(f'Padded after up shape: {padded.shape}')
+
+    lag = padded.shape[0] - height - shift
+    bottom = padded[height + shift - lag:shift + height, shift:-shift, :][:, ::-1]
+    padded[height + shift:, shift:-shift, :] = bottom
+    print(f'Padded after bottom shape: {padded.shape}')
+
+    left = padded[:, shift:2 * shift, :][:, :, ::-1]
+    padded[:, :shift, :] = left
+    print(f'Padded after left shape: {padded.shape}')
+
+    lag = padded.shape[1] - width - shift
+    right = padded[:, width + shift - lag:shift + width, :][:, :, ::-1]
+    print(f'Padded after right shape: {padded.shape}')
+
+    padded[:, width + shift:, :] = right
+
+    h_start = range(0, padded_height, stride)[:-1]
+    assert len(h_start) == num_h_tiles
+
+    w_start = range(0, padded_width, stride)[:-1]
+    assert len(w_start) == num_w_tiles
+
+    print(f'h_start: {len(h_start)} w_start: {len(w_start)}')
+
+    temp = []
+    for h in h_start:
+        for w in w_start:
+            temp += [padded[h:h + config.TILE_SIZE, w:w + config.TILE_SIZE, :]]
+
+    prediction = np.array(temp)
+
+    # standardize
+    if config.STANDARDIZE:
+        padded_img = batch_normalize(prediction, axis=(0, 1), c=1e-8)
+
+    print(f'Prediction shape: {prediction.shape}')
+    
+    prediction = model.predict(prediction)
+
+    predicted_mask = np.zeros((rounded_height, rounded_width, config.N_CLASSES))
+    for j_h, h in enumerate(h_start):
+        for j_w, w in enumerate(w_start):
+            i = len(w_start) * j_h + j_w
+            predicted_mask[h: h + stride, w: w + stride, :] = \
+                prediction[i][shift:shift + stride, shift:shift + stride, :]
+
+    return predicted_mask[:height, :width, :]
+
+def pred_mask(self, pr, threshold=0.50):
+    '''Predicted mask according to threshold'''
+    pr_cp = np.copy(pr)
+    pr_cp[pr_cp < threshold] = 0
+    pr_cp[pr_cp >= threshold] = 1
+    return pr_cp
 
 
 def _2d_spline(window_size=128, power=2) -> np.array:
