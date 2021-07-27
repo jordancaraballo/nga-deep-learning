@@ -202,7 +202,7 @@ class Configuration:
         self.PRED_WINDOW_SIZE = [8192, 8192]
 
         # self.MODEL_STR: specific model to open based on epoch
-        self.MODEL_STR = f"{self.MODEL_NAME}_66.h5"
+        self.MODEL_STR = f"{self.MODEL_NAME}_431.h5"
 
         # self.MODEL_NAME: model path and model name to open
         self.MODEL_NAME = f'{self.MODEL_SAVEDIR}/{self.MODEL_STR}'
