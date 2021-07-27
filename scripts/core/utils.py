@@ -504,13 +504,24 @@ def predict_all(x, model, config, spline):
 
 
 def predict_sliding_probs(x, model, config):
-
+    """
+    Predict full scene using average predictions.
+    Args:
+        x (numpy.array): image array
+        model (tf h5): image target size
+        config (Config):
+    Return:
+        prediction scene array average probabilities
+    ----------
+    Example
+    ----------
+        predict_sliding_probs(x, model, config, spline)
+    """
     # initial size: original tile (512, 512) - ((self.config.tile_size, ) * 2)
     stride = config.TILE_SIZE - config.PRED_OVERLAP
     shift = int((config.TILE_SIZE - stride) / 2)
 
     print(f'Stride and shift: {stride}, {shift}')
-
     height, width, num_channels = x.shape
 
     if height % stride == 0:
@@ -531,24 +542,19 @@ def predict_sliding_probs(x, model, config):
 
     padded = np.zeros((padded_height, padded_width, num_channels))
     padded[shift:shift + height, shift: shift + width, :] = x
-    print(f'Padded shape: {padded.shape}')
 
     up = padded[shift:2 * shift, shift:-shift, :][:, ::-1]
     padded[:shift, shift:-shift, :] = up
-    print(f'Padded after up shape: {padded.shape}')
 
     lag = padded.shape[0] - height - shift
     bottom = padded[height + shift - lag:shift + height, shift:-shift, :][:, ::-1]
     padded[height + shift:, shift:-shift, :] = bottom
-    print(f'Padded after bottom shape: {padded.shape}')
 
     left = padded[:, shift:2 * shift, :][:, :, ::-1]
     padded[:, :shift, :] = left
-    print(f'Padded after left shape: {padded.shape}')
 
     lag = padded.shape[1] - width - shift
     right = padded[:, width + shift - lag:shift + width, :][:, :, ::-1]
-    print(f'Padded after right shape: {padded.shape}')
 
     padded[:, width + shift:, :] = right
 
@@ -558,23 +564,19 @@ def predict_sliding_probs(x, model, config):
     w_start = range(0, padded_width, stride)[:-1]
     assert len(w_start) == num_w_tiles
 
-    print(f'h_start: {len(h_start)} w_start: {len(w_start)}')
-
+    # get tiles out of the imagery
     temp = []
     for h in h_start:
         for w in w_start:
             temp += [padded[h:h + config.TILE_SIZE, w:w + config.TILE_SIZE, :]]
-
-    prediction = np.array(temp)
+    prediction = np.array(temp)  # convert to numpy array
 
     # standardize
     if config.STANDARDIZE:
-        padded_img = batch_normalize(prediction, axis=(0, 1), c=1e-8)
-
-    print(f'Prediction shape: {prediction.shape}')
-    
+        prediction = batch_normalize(prediction, axis=(0, 1), c=1e-8)
     prediction = model.predict(prediction)
-
+    
+    # iterate over given predictions
     predicted_mask = np.zeros((rounded_height, rounded_width, config.N_CLASSES))
     for j_h, h in enumerate(h_start):
         for j_w, w in enumerate(w_start):
@@ -583,6 +585,7 @@ def predict_sliding_probs(x, model, config):
                 prediction[i][shift:shift + stride, shift:shift + stride, :]
 
     return predicted_mask[:height, :width, :]
+
 
 def pred_mask(self, pr, threshold=0.50):
     '''Predicted mask according to threshold'''
