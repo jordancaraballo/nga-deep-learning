@@ -197,7 +197,7 @@ class Configuration:
         self.PRED_FILENAMES = glob.glob(self.PRED_FILENAMES)
 
         # self.PRED_OVERLAP: overlap between tiles to predict
-        self.PRED_OVERLAP = 20 # 0.25
+        self.PRED_OVERLAP = 40 # 0.25
 
         # self.PRED_WINDOW_SIZE: greatest window size that can fit into memory
         self.PRED_WINDOW_SIZE = [8192, 8192]
