@@ -192,7 +192,7 @@ class Configuration:
         self.PRED_BATCH_SIZE = 128
 
         # self.PRED_FILENAMES: regex to flag all files to predict
-        self.PRED_FILENAMES = '/att/projects/Vietnam/images/*.tif'
+        self.PRED_FILENAMES = '/att/nobackup/jacaraba/nga-deeplearning-data/test/*.TIF'
         self.PRED_FILENAMES = glob.glob(self.PRED_FILENAMES)
 
         # self.PRED_OVERLAP: overlap between tiles to predict
