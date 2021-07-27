@@ -4,6 +4,7 @@
 # --------------------------------------------------------------------------
 import os                # system modifications
 import time              # tracking time
+import logging           # logging for output
 import numpy as np       # for arrays modifications
 import cupy as cp        # for arrays modifications
 import pandas as pd      # pandas library for csv
@@ -69,7 +70,6 @@ def main():
 
     # Initialize dataframe with data details
     df_data = pd.read_csv(config.PREP_DATA_FILE)
-    print(df_data)
 
     # create directory to store dataset
     os.system(f'mkdir -p {config.PREP_TRAIN_OUTDIR} {config.PREP_VAL_OUTDIR}')
@@ -78,8 +78,8 @@ def main():
     for ind in df_data.index:
 
         # Specify data files to read and process
-        fimg = config.PREP_DATA_INPDIR + '/' + df_data['data'][ind]
-        fmask = config.PREP_LABELS_INPDIR + '/' + df_data['label'][ind]
+        fimg = os.path.join(config.PREP_DATA_INPDIR, df_data['data'][ind])
+        fmask = os.path.join(config.PREP_LABELS_INPDIR, df_data['label'][ind])        
         print(f'Processing file #{ind+1}: ', df_data['data'][ind])
 
         # Read imagery from disk
@@ -104,12 +104,13 @@ def main():
         img = img[:len(config.PREP_BANDS_OUTPUT), :, :]
 
         # accounting for contaminated pixels, TOA values
-        img[img < 0] = 0  # remove lower bound values
-        img[img > 10000] = 10000  # remove higher bound values
+        # remove lower and higher bound values
+        img = cp.clip(img, 0, 10000)
 
         # adding indices if required, only if data does not come with
         # dedicated indices and need to be calculated on the fly.
 
+        # Examples you can use:
         # fdi = \
         # indices.fdi(img, BANDS_INPUT, factor=INDICES_FACTOR, vtype='int16')
         # si = \

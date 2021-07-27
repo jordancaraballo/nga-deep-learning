@@ -187,25 +187,17 @@ def main():
             # Getting predicted labels
             # --------------------------------------------------------------------------------
 
-            if config.PROBABILITIES:
-                
-                prediction = predict_sliding_probs(x_data, model, config)
-                print("predicted shape and tupe", prediction.shape, type(prediction))
-                np.save(save_segment, prediction)
-
-            else:
-
-                prediction = predict(
-                    x_data, model, config, spline, normalize=config.NORMALIZE,
-                    standardize=config.STANDARDIZE
-                )
-                prediction = prediction.astype(np.int8)  # type to int16
-
-                # --------------------------------------------------------------------------------
-                # Generating visualization from prediction
-                # --------------------------------------------------------------------------------
-                arr_to_tif(raster_f=fname, segments=prediction, out_tif=save_image)
+            # predict probabilities
+            prediction = predict_sliding_probs(x_data, model, config)
+            print("predicted shape and tupe", prediction.shape, type(prediction))
             
+            # generates the probabilities
+            if config.PROBABILITIES:
+                np.save(save_segment, prediction)
+            
+            # get final mask and save the output
+            prediction = prediction.argmax(axis=-1)
+            arr_to_tif(raster_f=fname, segments=prediction, out_tif=save_image)
             del prediction
 
         # This is the case where the prediction was already saved
