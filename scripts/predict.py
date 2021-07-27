@@ -154,7 +154,12 @@ def main():
 
         # path + name to store prediction into
         save_image = \
-            config.PRED_SAVE_DIR + fname[:-4].split('/')[-1] + '_pred.tif'
+            os.path.join(config.PRED_SAVE_DIR, fname[:-4].split('/')[-1] + '_pred.tif')
+            #config.PRED_SAVE_DIR + fname[:-4].split('/')[-1] + '_pred.tif'
+
+        save_segment = \
+            os.path.join(config.PRED_SEG_SAVE_DIR, fname[:-4].split('/')[-1] + '_prob.npy')
+            #config.PRED_SAVE_DIR + fname[:-4].split('/')[-1] + '_pred.tif'
 
         # --------------------------------------------------------------------------------
         # if prediction is not on directory, start predicting
@@ -169,7 +174,7 @@ def main():
             # --------------------------------------------------------------------------------
             x_data = xr.open_rasterio(fname, chunks=config.DASK_SIZE)
             x_data = x_data.transpose("y", "x", "band")
-            x_data = x_data[:, :, :4]
+            x_data = x_data[:, :, :len(config.PREP_BANDS_OUTPUT)]
 
             # --------------------------------------------------------------------------------
             # Calculate missing indices
@@ -184,7 +189,7 @@ def main():
                 
                 prediction = predict_sliding_probs(x_data, model, config)
                 print("predicted shape and tupe", prediction.shape, type(prediction))
-                #np.save()
+                np.save(save_segment, prediction)
 
             else:
 
