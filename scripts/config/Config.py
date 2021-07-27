@@ -190,6 +190,7 @@ class Configuration:
 
         # self.PRED_BSIZE: batch size for concurrent imagery predictions
         self.PRED_BATCH_SIZE = 128
+        self.PROBABILITIES = True
 
         # self.PRED_FILENAMES: regex to flag all files to predict
         self.PRED_FILENAMES = '/att/nobackup/jacaraba/nga-deeplearning-data/test/*.TIF'

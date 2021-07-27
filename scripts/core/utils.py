@@ -499,8 +499,12 @@ def predict_all(x, model, config, spline):
             gc.collect()
 
     del x, temp  # delete arrays
-    x_seg /= 8.0
-    return x_seg.argmax(axis=0)
+    x_seg /= 8.0  # get average probabilities
+
+    if config.PROBABILITIES:
+        return x_seg
+    else:
+        return x_seg.argmax(axis=0)
 
 
 def _2d_spline(window_size=128, power=2) -> np.array:
